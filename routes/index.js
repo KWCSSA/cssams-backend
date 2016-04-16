@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var Account = require('../public/javascripts/account.js');
-var gd = require('node-gd');
+// var gd = require('node-gd');
 var jwt    = require('jsonwebtoken');
 var app = express();
 //define constant values
