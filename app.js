@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var jwt    = require('jsonwebtoken');
 var app = express();
 
 var mongoose = require('mongoose');
@@ -43,6 +43,8 @@ mongoose.connect('mongodb://localhost/passport_local_mongoose_examples', functio
     console.log('Could not connect to mongodb on localhost. Ensure that you have mongodb running on localhost and mongodb accepts connections on standard ports!');
   }
 });
+
+// app.set('superSecret', "ilovediantang"); // secret variable
 
 //register routes
 app.use('/', routes);
