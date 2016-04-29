@@ -44,7 +44,6 @@ mongoose.connect('mongodb://localhost/passport_local_mongoose_examples', functio
   }
 });
 
-// app.set('superSecret', "ilovediantang"); // secret variable
 
 //register routes
 app.use('/', routes);
