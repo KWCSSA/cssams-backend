@@ -1,6 +1,6 @@
 var fs = require('fs') , 
 	gm = require('gm').subClass({imageMagick: true});
-var DBService = require('./DBService');
+var DBService = require('./dbservice.js');
 function pad(width, string, padding) { 
   return (width <= string.length) ? string : pad(width, padding + string, padding);
 }
