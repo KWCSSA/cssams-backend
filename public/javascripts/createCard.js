@@ -36,7 +36,8 @@ var CardCreator = {
 	.write('public/cards/'+user_memid+'.png',function(err) {
 		if(err) cb(err,null);
 		else {
-			cb(null,"http://tangdian.ca:5500/cards/"+user_memid+".png");
+			cb(null,{imageURL:"http://tangdian.ca:5500/cards/"+user_memid+".png",
+				imageName:user_memid+".png"});
 		}
 	});
 

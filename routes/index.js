@@ -110,10 +110,10 @@ router.get('/cardimage',function(req,res,next){
   DBService.getUser(req.decoded._doc.username,function(err,user) {
     if (err) console.log(err);
     console.log(JSON.stringify(user));
-    CardCreater.createCard(user.fname,user.lname,user.idnum, function(err,imageURL) {
+    CardCreater.createCard(user.fname,user.lname,user.idnum, function(err,data) {
       if (err) console.log(err);
         else {
-          res.json({imageURL:imageURL});
+          res.json({imageURL:data.imageURL,imageName:data.imageName});
         }
 
     });
