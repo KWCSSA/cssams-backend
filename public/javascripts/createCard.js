@@ -23,17 +23,17 @@ var CardCreator = {
         width_start_position = width_start_position + (16 - card_owner_text.length)*0.03;
      }
 
-	gm('public/images/card.png')
+	gm('../images/card.png')
 	.resize(card_width,card_height)
 	.font('public/images/arial.ttf')
 	.fill("rgb(239,220,155)")
 	.fontSize(name_height_offset)
 	.drawText(card_width*width_start_position,card_height*0.72+name_height_offset,card_owner_text)
-	.font('public/images/kredit_front.ttf')
+	.font('../images/kredit_front.ttf')
 	.fontSize(card_height_offset)
 	.fill("rgb(255,255,255)")
 	.drawText(card_width*0.084,card_height*0.42+name_height_offset,card_number_text)
-	.write('public/cards/'+user_memid+'.png',function(err) {
+	.write('../cards/'+user_memid+'.png',function(err) {
 		if(err) cb(err,null);
 		else {
 			cb(null,{imageURL:"http://tangdian.ca:5500/cards/"+user_memid+".png",
