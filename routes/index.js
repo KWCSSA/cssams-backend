@@ -19,6 +19,10 @@ function pad(width, string, padding) {
 //   res.render('index', { title: 'Express' });r
 // });
 
+router.get ('/shit',function(req,res,next) {
+  res.json({shit:"fuck"});
+});
+
 router.post('/register',function(req,res,next) {
 	console.log('registering user');
   var user_regdate = new Date(Date.now()).toISOString();
