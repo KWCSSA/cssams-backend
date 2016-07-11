@@ -8,7 +8,7 @@ var DBService = {
 				console.log(err);
 				cb(err,null);
 			}
-			cb(null,user);
+			else cb(null,user);
 
 		});
 	},
@@ -21,6 +21,16 @@ var DBService = {
 			}
 			console.log('number of students is '+count);
 			cb(null,count);
+		});
+	},
+
+	getInfo: function(email,cb) {
+		Account.findOne({email:email},function(err,uesr) {
+			if(err) {
+				console.log(err);
+				cb(err, null);
+			}
+			else cb(null, user);
 		});
 	}
 };

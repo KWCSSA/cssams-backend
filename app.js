@@ -38,7 +38,7 @@ app.use(cors());
 
 
 //connect mongodb
-mongoose.connect('mongodb://localhost/passport_local_mongoose_examples', function(err) {
+mongoose.connect('mongodb://localhost/cssams', function(err) {
   if (err) {
     console.log('Could not connect to mongodb on localhost. Ensure that you have mongodb running on localhost and mongodb accepts connections on standard ports!');
   }

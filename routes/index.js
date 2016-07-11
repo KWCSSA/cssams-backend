@@ -3,25 +3,16 @@ var router = express.Router();
 var passport = require('passport');
 var Account = require('../public/javascripts/account.js');
 var CardCreater = require('../public/javascripts/createCard.js');
-// var gd = require('node-gd');
 var DBService = require('../public/javascripts/dbservice.js');
 var jwt    = require('jsonwebtoken');
+var secret = require('../public/javascripts/secret.js').jwtSecret;
+var bosses = require('../public/javascripts/shopdata.js');
+var mailService = require('../public/javascripts/mailservice.js');
 var app = express();
-// app.set('superSecret', "ilovediantang"); // secret variable
-//define constant values
 
 function pad(width, string, padding) { 
   return (width <= string.length) ? string : pad(width, padding + string, padding);
 }
-
-// /* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });r
-// });
-
-router.get ('/shit',function(req,res,next) {
-  res.json({shit:"fuck"});
-});
 
 router.post('/register',function(req,res,next) {
 	console.log('registering user');
@@ -36,6 +27,7 @@ router.post('/register',function(req,res,next) {
      Account.register(new Account({username: req.body.username,
       fname:req.body.fname,
       lname:req.body.lname,
+      email:req.body.email,
       regdate:user_regdate,
       idnum:user_memid_padding}), req.body.password, function(err) {
       if (err) {
@@ -46,6 +38,7 @@ router.post('/register',function(req,res,next) {
       else {
         res.json({success:true});
         console.log('user registered!');
+        mailService.sendWelcomeEmail(req.body.fname,req.body.email,req.body.username,req.body.password);
       }
       
   });
@@ -57,10 +50,9 @@ router.post('/login', passport.authenticate('local', { session: false }),functio
       console.log('user logon!');
       console.log(req.user);
 
-        var token = jwt.sign(req.user, "iLoveDian", {
-          expiresIn: 3600 // expires in 24 hours
+        var token = jwt.sign(req.user, secret, {
+          expiresIn: '365d' // expires in 24 hours
         });
-
         // return the information including token as JSON
         res.json({
           success: true,
@@ -71,6 +63,9 @@ router.post('/login', passport.authenticate('local', { session: false }),functio
 
 });
 
+router.get('/bosses', function (req,res,next) {
+  res.json(bosses);
+});
 
 
 
@@ -83,7 +78,7 @@ console.log("GETTING THROUGH MIDDLEWARE");
   if (token) {
 
     // verifies secret and checks exp
-    jwt.verify(token, "iLoveDian", function(err, decoded) {      
+    jwt.verify(token, secret, function(err, decoded) {      
       if (err) {
         return res.json({ success: false, message: 'Failed to authenticate token.' });    
       } else {
@@ -117,6 +112,7 @@ router.get('/cardimage',function(req,res,next){
     CardCreater.createCard(user.fname,user.lname,user.idnum, function(err,data) {
       if (err) console.log(err);
         else {
+          console.log (data);
           res.json({imageURL:data.imageURL,imageName:data.imageName});
         }
 
