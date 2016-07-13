@@ -36,8 +36,7 @@ var bosses = {
 			description: "10% Off (特价商品除外，代卖品牌和酒精饮料除外）",
 			imageUrl:"http://ituwcssa.com:5500/logos/foodie.png",
 			time: "Sun - Thurs: 11:30am - 11:30pm \
-			Fri, Sat: 11:30am - 12:00am \
-			*This is summer business hours,winter business hours will be back to regular hours",
+			Fri, Sat: 11:30am - 12:00am ",
 		},
 		{
 			title: "乡粤湘情 Empire Restaurant",
@@ -133,6 +132,7 @@ var bosses = {
 			address: "31 University Ave E, Waterloo",
 			phone: "519-888-0088",
 			description: "Over 25 CAD: 10% Off",
+			imageUrl:"http://ituwcssa.com:5500/logos/sowon.png",
 			time: "11am - 10pm, TUE closed"
 
 		},
@@ -141,6 +141,7 @@ var bosses = {
 			id: "sowon",
 			address: "150 University Ave W, Waterloo",
 			phone: "519-772-0146",
+			imageUrl:"http://ituwcssa.com:5500/logos/shidexi.png",
 			description: "Cash 10% Off",
 			time: ""
 
@@ -156,7 +157,7 @@ var bosses = {
 		},
 		{
 			title: "石头剪刀铺",
-			id: "enkang",
+			id: "rsp",
 			address:"Unit A, 181 Lester Street, Waterloo",
 			time:"",
 			description:"Have a second chance to play rock paper scissors.",
@@ -165,7 +166,7 @@ var bosses = {
 		},
 		{
 			title: "Rolling Peppers",
-			id: "enkang",
+			id: "rollingpepper",
 			address:"Unit4, 2 King st North, Waterloo; King&Erb; The Waterloo Hotel First Floor",
 			time:"",
 			description:"Cash 10% Off",
