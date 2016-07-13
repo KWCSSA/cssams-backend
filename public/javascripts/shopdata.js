@@ -202,7 +202,7 @@ var bosses = {
 			imageUrl:"http://ituwcssa.com:5500/logos/noon.png",
 			time: "Mon-Saturday: 11:00 am – 1:00 am\
 			Sunday: 12:00 pm – 1:00 am"
-		},
+		}, 
 		{
 			title: "Chatime",
 			id: "chatime",
@@ -221,7 +221,7 @@ var bosses = {
 		phone: "Wechat: newpioneertravel",
 		description: "旅游产品9折，机票price match基础上$10 off",
 		time: "",
-		imageUrl:"http://ituwcssa.com:5500/logos/pioneer.png",
+		imageUrl:"http://ituwcssa.com:5500/logos/shuicheng.png",
 	 },
 	 {
 	 	title: "McPhail’s Cycle & Sport",

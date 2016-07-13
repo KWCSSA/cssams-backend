@@ -27,7 +27,7 @@ router.post('/register',function(req,res,next) {
      Account.register(new Account({username: req.body.username,
       fname:req.body.fname,
       lname:req.body.lname,
-      email:req.body.email,
+      email:req.body .email,
       regdate:user_regdate,
       idnum:user_memid_padding}), req.body.password, function(err) {
       if (err) {
@@ -117,6 +117,18 @@ router.get('/cardimage',function(req,res,next){
         }
 
     });
+   
+  });
+
+});
+
+router.get('/profile',function(req,res,next){
+
+  console.log("gettingProfile!");
+  DBService.getUser(req.decoded._doc.username,function(err,user) {
+    if (err) console.log(err);
+    console.log(JSON.stringify(user));
+    res.json(user);
    
   });
 
