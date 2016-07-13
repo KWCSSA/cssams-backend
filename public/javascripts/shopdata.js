@@ -132,7 +132,7 @@ var bosses = {
 			address: "31 University Ave E, Waterloo",
 			phone: "519-888-0088",
 			description: "Over 25 CAD: 10% Off",
-			imageUrl:"http://ituwcssa.com:5500/logos/sowon.png",
+			imageUrl:"http://ituwcssa.com:5500/logos/shidexi.png",
 			time: "11am - 10pm, TUE closed"
 
 		},
@@ -141,7 +141,7 @@ var bosses = {
 			id: "sowon",
 			address: "150 University Ave W, Waterloo",
 			phone: "519-772-0146",
-			imageUrl:"http://ituwcssa.com:5500/logos/shidexi.png",
+			imageUrl:"http://ituwcssa.com:5500/logos/sowon.png",
 			description: "Cash 10% Off",
 			time: ""
 
@@ -151,7 +151,7 @@ var bosses = {
 			id: "enkang",
 			address:"5B-150 University Avenue West, Waterloo",
 			time:"11AM - 1AM, Sunday: 12PM-1AM",
-			description:"15% off with membership card!",
+			description:"5% off",
 			phone:"519-208-0061",
 			imageUrl:"http://ituwcssa.com:5500/logos/enkang.png"
 		},
@@ -160,7 +160,7 @@ var bosses = {
 			id: "rsp",
 			address:"Unit A, 181 Lester Street, Waterloo",
 			time:"",
-			description:"Have a second chance to play rock paper scissors.",
+			description:"第二次石头剪刀布机会",
 			phone:"",
 			imageUrl:"http://ituwcssa.com:5500/logos/rsp.png"
 		},
