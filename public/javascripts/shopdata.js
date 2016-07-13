@@ -1,21 +1,15 @@
 var bosses = {
 	"Restaurant": [
 			{
-				title: "Noon Moment",
-				id: "noonnoon",
-				address:"220 King Street North, Waterloo",
-				time:"11AM - 1AM, Sunday: 12PM-1AM",
-				description:"15% off with membership card!",
-				phone:"(519) 208-0331",
-				imageUrl:"http://ituwcssa.com:5500/logos/noon.png"
-			},
-			{
 				title: "Bogda",
 				id: "bogda",
-				address:"220 King Street North, Waterloo",
-				time:"11AM - 1AM, Sunday: 12PM-1AM",
-				description:"15% off with membership card!",
-				phone:"(519) 208-0331",
+				address:"62 Balsam St. Waterloo",
+				time:"Mon-Fri: 11:00am-10:00pm\
+				Sat: 11:00am-10:00pm\
+				Sun: Closed\
+				*July 1 - August 31: 4pm - 10pm",
+				description:"10% Off",
+				phone:"519-886-2929",
 				imageUrl:"http://ituwcssa.com:5500/logos/bogda.png"
 			},
 			{
@@ -33,7 +27,7 @@ var bosses = {
 			id: "foodie",
 			address: "203 Lester St., Unit 7, Waterloo",
 			phone: "519-880-8688",
-			description: "10% Off (特价商品除外，代卖品牌和酒精饮料除外）",
+			description: "10% Off (特价商品，代卖品牌和酒精饮料除外）",
 			imageUrl:"http://ituwcssa.com:5500/logos/foodie.png",
 			time: "Sun - Thurs: 11:30am - 11:30pm \
 			Fri, Sat: 11:30am - 12:00am ",
@@ -218,8 +212,7 @@ var bosses = {
 	 	title: "7 days Mini Mart (水城便利店）",
 		id: "shuicheng",
 		address: "",
-		phone: "Wechat: newpioneertravel",
-		description: "旅游产品9折，机票price match基础上$10 off",
+		description: "",
 		time: "",
 		imageUrl:"http://ituwcssa.com:5500/logos/shuicheng.png",
 	 },
@@ -248,7 +241,7 @@ var bosses = {
 			id: "funhouse",
 			address: "First floor 208 sunview st., Waterloo",
 			phone: "",
-			description: "Membership card at Funhouse 15% off\
+			description: "Funhouse 会员卡 15% off\
 			Purchase 5% off",
 			imageUrl: "http://ituwcssa.com:5500/logos/funhouse.png",
 			time: ""
@@ -257,7 +250,7 @@ var bosses = {
 	"Service": [
 		{
 			title: "幻彩发艺",
-			id: "pioneer",
+			id: "huancai",
 			address: "62 Balsam St. H102，Waterloo",
 			phone: "226-929-0666",
 			description: "",
