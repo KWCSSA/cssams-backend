@@ -8,7 +8,7 @@ var transporter = nodemailer.createTransport(smtpConfig);
 var mailService = {
 
 	sendWelcomeEmail: function(user) {
-		var htmlStream = fs.createReadStream('welcome.html');
+		var htmlStream = fs.createReadStream('./welcome.html');
 		var data = '';
 
 		htmlStream.on('data', function(chunk) {
