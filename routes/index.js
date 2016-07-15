@@ -38,7 +38,11 @@ router.post('/register',function(req,res,next) {
       else {
         res.json({success:true});
         console.log('user registered!');
-        mailService.sendWelcomeEmail(req.body.fname,req.body.email,req.body.username,req.body.password);
+        mailService.sendWelcomeEmail({
+          firstName:req.body.fname,
+          email:req.body.email,
+          username:req.body.username,
+          password:req.body.password});
       }
       
   });

@@ -1,22 +1,30 @@
 var nodemailer = require('nodemailer');
 var smtpConfig = require('./secret.js').smtpConfig;
-
-
+var fs = require('fs');
+var ejs = require('ejs');
 var transporter = nodemailer.createTransport(smtpConfig);
 
-// setup e-mail data with unicode symbols
-
-
-// send mail with defined transport object
 
 var mailService = {
-	sendWelcomeEmail: function(name, email, username, password) {
+
+	sendWelcomeEmail: function(user) {
+		var htmlStream = fs.createReadStream('welcome.html');
+		var data = '';
+
+		htmlStream.on('data', function(chunk) {
+		    data+=chunk;
+		});
+
+		htmlStream.on('end', function() {
+		    console.log(data);
+		var text = ejs.render(data, user);
+		var subject = ejs.render('Hello <%= firstName %>, 欢迎加入KWCSSA!', user);
+
 		var mailOptions = {
 		    from: '"Dian Tang" <it@uwcssa.com>', // sender address
-		    to: email, // list of receivers
-		    subject: 'Hello' + name + ', 欢迎加入UWCSSA！', // Subject line
-		    text: 'Hello' + name + '欢迎加入UWCSSA!' + '你的账户信息为:'+ 'username: ' + username + '\r password' + password,
-		    html: '<b>'+'Hello ' + name +'<br>'+ '欢迎加入UWCSSA!' + '你的账户信息为:'+ 'username: '+ username + '<br>'+' password' + password + '</b>'
+		    to: user.email, // list of receivers
+		    subject: subject,
+		    html: text
 		};
 		transporter.sendMail(mailOptions, function(error, info){
 		    if(error){
@@ -24,9 +32,18 @@ var mailService = {
 		    }
 		    console.log('Message sent: ' + info.response);
 		});
+		});
+
+		
 	},
 
 
 };
-
+// 		var user = {
+// 			firstName: 'Dian',
+// 			email: 'dean99dean@gmail.com',
+// 			username:'dean99dean',
+// 			password:'fuckyou'
+// 		};
+// mailService.sendWelcomeEmail(user);
 module.exports = mailService;
