@@ -187,7 +187,7 @@ var bosses = {
 		},
 		{
 			title: "感叹号 （Exclamation Mark）",
-			id: "bao",
+			id: "exclamation",
 			address: "63 Hickory Street, Waterloo",
 			time:"",
 			description: "10% Off",
