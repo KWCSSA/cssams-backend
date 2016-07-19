@@ -242,6 +242,15 @@ var bosses = {
 		description: "配件和冰球器材八五折，买原价新车赠送70元头盔或60元锁",
 		time: "",
 		imageUrl:"http://ituwcssa.com:5500/logos/mcphail.png",
+	 },
+	 {
+	 	title: "Ms. Salty Cake Boutique",
+		id: "salty",
+		address: "微信：mssalty",
+		phone: "226-791-9691",
+		description: "主店直购九五折+两份免费甜品；UW五公里内免费送餐",
+		time: "工作室，无实体店。",
+		imageUrl:"http://ituwcssa.com:5500/logos/salty.png",
 	 }
 	],
 	"Entertainment":[
@@ -289,7 +298,7 @@ var bosses = {
 			time: "Monday - Friday 11am-7pm \
 			Saturday 10am-7pm \
 			Sunday 12pm-5pm",
-			imageUrl:"",
+			imageUrl:"http://ituwcssa.com:5500/logos/huancai.png",
 		},
 		{
 			title: "EE洗车",
