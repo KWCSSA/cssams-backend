@@ -67,15 +67,15 @@ var bosses = {
 			time: "Mon-Fri: 11:00 am – 10:00 pm\
 			Sat-Sun: 12:00 pm – 10:00 pm"
 		},
-		{
-			title: "德庄(Morals Village)",
-			id: "moral",
-			address: "19-160  University Ave West, Waterloo",
-			phone: "519-954-8883",
-			description: "10% Off",
-			imageUrl: "http://ituwcssa.com:5500/logos/moral.png",
-			time: ""
-		},
+		// {
+		// 	title: "德庄(Morals Village)",
+		// 	id: "moral",
+		// 	address: "19-160  University Ave West, Waterloo",
+		// 	phone: "519-954-8883",
+		// 	description: "10% Off",
+		// 	imageUrl: "http://ituwcssa.com:5500/logos/moral.png",
+		// 	time: ""
+		// },
 		{
 			title: "糖记 (Sugar Marmalade )",
 			id: "tangji",
@@ -83,7 +83,7 @@ var bosses = {
 			phone: "226-647-3382",
 			description: "糖记积分卡双倍积分",
 			imageUrl: "http://ituwcssa.com:5500/logos/tangji.png",
-			time: "12:00 pm – 1:00 am"
+			time: "12:00 pm – 1`:00 am"
 
 		},
 		{
@@ -125,7 +125,7 @@ var bosses = {
 			title: "食德喜小馆 (China Garden) ",
 			address: "31 University Ave E, Waterloo",
 			phone: "519-888-0088",
-			description: "Over 25 CAD: 10% Off",
+			description: "Over 25: Cash 10% Off",
 			imageUrl:"http://ituwcssa.com:5500/logos/shidexi.png",
 			time: "11am - 10pm, TUE closed"
 
@@ -184,6 +184,24 @@ var bosses = {
 			description: "10% Off",
 			phone: "519-208-1226",
 			imageUrl: "http://ituwcssa.com:5500/logos/bao.png"
+		},
+		{
+			title: "感叹号 （Exclamation Mark）",
+			id: "bao",
+			address: "63 Hickory Street, Waterloo",
+			time:"",
+			description: "10% Off",
+			phone: "519-954-8866",
+			imageUrl: "http://ituwcssa.com:5500/logos/exclamation.png"
+		},
+		{
+			title: "华香楼 (Ming Chef House)",
+			id: "huaxiang",
+			address: "210-265 King Street East, Kitchener",
+			time:"11:30 - 23:00",
+			description: "Cash 5% Off",
+			phone: "",
+			imageUrl: "http://ituwcssa.com:5500/logos/huaxiang.png"
 		}
 	],
 	"Drink":[
@@ -241,11 +259,25 @@ var bosses = {
 			id: "funhouse",
 			address: "First floor 208 sunview st., Waterloo",
 			phone: "",
-			description: "Funhouse 会员卡 15% off\
-			Purchase 5% off",
+			description: "会员卡办卡只需20刀，全场消费95折",
 			imageUrl: "http://ituwcssa.com:5500/logos/funhouse.png",
 			time: ""
 		},
+		{
+			title: "K-ZONE",
+			id: "kzone",
+			address: "",
+			phone: "",
+			description: "",
+			time: "周二 17：00-1：00\
+				周三 17：00-1：00\
+				周四 17：00-2：00\
+				周五 16：00-3：00\
+				周六 16：00-3：00\
+				周日17：00-1：00",
+			imageUrl:"http://ituwcssa.com:5500/logos/kzone.png",
+		}
+		
 	],
 	"Service": [
 		{
@@ -258,6 +290,15 @@ var bosses = {
 			Saturday 10am-7pm \
 			Sunday 12pm-5pm",
 			imageUrl:"",
+		},
+		{
+			title: "EE洗车",
+			id: "ee",
+			address: "165 bathurst Dr Unit#5 N2V 1Z4, Waterloo",
+			phone: "226-929-0666",
+			description: "",
+			time: "11：30-20:00, TUE closed",
+			imageUrl:"http://ituwcssa.com:5500/logos/ee.png",
 		}
 	]
 	
