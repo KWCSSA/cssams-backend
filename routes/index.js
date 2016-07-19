@@ -22,7 +22,7 @@ router.post('/register',function(req,res,next) {
   
   DBService.getLastNumber(function(err,count) {
     if (err) console.log(err);
-    var user_idnum = count + 1;
+    var user_idnum = count + 1 + 1000;
     var user_memid_padding = register_year + pad(8,user_idnum,'0');
      Account.register(new Account({username: req.body.username,
       fname:req.body.fname,

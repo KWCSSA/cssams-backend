@@ -83,7 +83,7 @@ var bosses = {
 			phone: "226-647-3382",
 			description: "糖记积分卡双倍积分",
 			imageUrl: "http://ituwcssa.com:5500/logos/tangji.png",
-			time: "12:00 pm – 2:00 am"
+			time: "12:00 pm – 1:00 am"
 
 		},
 		{
