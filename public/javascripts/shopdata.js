@@ -190,7 +190,7 @@ var bosses = {
 			id: "exclamation",
 			address: "63 Hickory Street, Waterloo",
 			time:"",
-			description: "10% Off",
+			description: "Cash 10% Off",
 			phone: "519-954-8866",
 			imageUrl: "http://ituwcssa.com:5500/logos/exclamation.png"
 		},
