@@ -1,6 +1,25 @@
 var bosses = {
 	"Restaurant": [
 			{
+				title: "Noon Moment",
+				id:"noon", 
+				address: "220 King Street North, Waterloo",
+				phone: "519-208-0331",
+				description: "15% Off",
+				imageUrl:"http://ituwcssa.com:5500/logos/noon.png",
+				time: "Mon-Saturday: 11:00 am – 1:00 am\
+				Sunday: 12:00 pm – 1:00 am"
+		    }, 
+			{
+				title: "Chatime",
+				id: "chatime",
+				address: "255 King St N #9, Waterloo",
+				phone: "519-208-5580",
+				description: "所有饮料 Free Topping",
+				imageUrl: "http://ituwcssa.com:5500/logos/chatime.png",
+				time: "Mon-Sun: 11:30AM - 12:00AM"
+			},
+			{
 				title: "Bogda",
 				id: "bogda",
 				address:"62 Balsam St. Waterloo",
@@ -15,7 +34,7 @@ var bosses = {
 			{
 			title: "马队长拉面",
 			id: "ma",
-			address: "220 King Street North, Waterloo, ON",
+			address: "220 King Street North, Waterloo",
 			imageUrl: "http://ituwcssa.com:5500/logos/ma.png",
 			time: "Mon-Sun: 10:00 am – 11:30 pm",
 			description: "现金 10% off",
@@ -43,7 +62,7 @@ var bosses = {
 		{
 			title: "莲花烧烤",
 			id: "lianhua",
-			address: "150 University Ave W, Waterloo, ON N2L 6J3",
+			address: "150 University Ave W, Waterloo",
 			phone: "519-580-6666",
 			description: "现金 10% Off",
 			time: "Mon-Fri: 11:00 am – 10:00 pm\
@@ -227,14 +246,6 @@ var bosses = {
 	],
 	"Shopping": [
 	 {
-	 	title: "7 days Mini Mart (水城便利店）",
-		id: "shuicheng",
-		address: "",
-		description: "",
-		time: "",
-		imageUrl:"http://ituwcssa.com:5500/logos/shuicheng.png",
-	 },
-	 {
 	 	title: "McPhail’s Cycle & Sport",
 		id: "mcphail",
 		address: "98 King St. N, Waterloo",
@@ -251,6 +262,24 @@ var bosses = {
 		description: "主店直购九五折+两份免费甜品；UW五公里内免费送餐",
 		time: "工作室，无实体店。",
 		imageUrl:"http://ituwcssa.com:5500/logos/salty.png",
+	 },
+	 {
+	 	title: "7 days Mini Mart (水城便利店）",
+		id: "shuicheng",
+		address: "465 Phillip St. Waterloo",
+		phone: "519-279-4331, 519-725-1732",
+		description: "以下商品15% off: \
+			Zippo 打火机, \
+			MapleLife系列健康产品（海豹油 etc), \
+			以下商品10% off: \
+			枫叶糖浆, \
+			手机配件（充电器，耳机，手机壳等), \
+			电子烟, \
+			传真, 复印, 打印，扫描, \
+			缝纫服务（改裤脚等）",
+		time: "Mon to Fri 8:00 am-9:30 pm Sat 8:00 am-9:00 pm\
+		Sunday 9:00 am-9:00 pm ( 1:00 PM -4:00 PM 休息）",
+		imageUrl:"http://ituwcssa.com:5500/logos/shuicheng.png",
 	 }
 	],
 	"Entertainment":[
@@ -301,7 +330,7 @@ var bosses = {
 			imageUrl:"http://ituwcssa.com:5500/logos/huancai.png",
 		},
 		{
-			title: "EE洗车",
+			title: "EE汽车美容",
 			id: "ee",
 			address: "165 bathurst Dr Unit#5 N2V 1Z4, Waterloo",
 			phone: "226-929-0666",
