@@ -20,7 +20,7 @@ var bosses = {
 				time: "Mon-Sun: 11:30AM - 12:00AM"
 			},
 			{
-				title: "Bogda",
+				title: "博格达 Bogda",
 				id: "bogda",
 				address:"62 Balsam St. Waterloo",
 				time:"Mon-Fri: 11:00am-10:00pm\
