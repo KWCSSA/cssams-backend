@@ -239,7 +239,7 @@ var bosses = {
 			id: "chatime",
 			address: "255 King St N #9, Waterloo",
 			phone: "519-208-5580",
-			description: "所有饮料 Free Topping",
+			description: "所有饮料 One Free Topping",
 			imageUrl: "http://ituwcssa.com:5500/logos/chatime.png",
 			time: "Mon-Sun: 11:30AM - 12:00AM"
 		},
@@ -306,7 +306,7 @@ var bosses = {
 			id: "kzone",
 			address: "",
 			phone: "",
-			description: "",
+			description: "10% Off",
 			time: "周二 17：00-1：00\
 				周三 17：00-1：00\
 				周四 17：00-2：00\
@@ -333,7 +333,7 @@ var bosses = {
 			title: "EE汽车美容",
 			id: "ee",
 			address: "165 bathurst Dr Unit#5 N2V 1Z4, Waterloo",
-			phone: "226-929-0666",
+			phone: "519-888-8255",
 			description: "",
 			time: "11：30-20:00, TUE closed",
 			imageUrl:"http://ituwcssa.com:5500/logos/ee.png",
