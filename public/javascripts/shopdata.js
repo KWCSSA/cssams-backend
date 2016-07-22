@@ -15,7 +15,7 @@ var bosses = {
 				id: "chatime",
 				address: "255 King St N #9, Waterloo",
 				phone: "519-208-5580",
-				description: "所有饮料 Free Topping",
+				description: "所有饮料 One Free Topping",
 				imageUrl: "http://ituwcssa.com:5500/logos/chatime.png",
 				time: "Mon-Sun: 11:30AM - 12:00AM"
 			},
