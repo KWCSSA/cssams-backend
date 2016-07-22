@@ -96,13 +96,13 @@ var bosses = {
 		// 	time: ""
 		// },
 		{
-			title: "糖记 (Sugar Marmalade )",
+			title: "糖记 (Sugar Marmalade)",
 			id: "tangji",
 			address: "203 Lester Street Unit 5, Waterloo",
 			phone: "226-647-3382",
 			description: "糖记积分卡双倍积分",
 			imageUrl: "http://ituwcssa.com:5500/logos/tangji.png",
-			time: "12:00 pm – 1`:00 am"
+			time: "12:00 pm – 1:00 am"
 
 		},
 		{
