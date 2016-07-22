@@ -57,6 +57,7 @@ var bosses = {
 			address: "160 University Ave W, Waterloo",
 			phone: " 519-588-7777",
 			description: "现金 10% Off",
+			imageUrl: "http://ituwcssa.com:5500/logos/empire.png",
 			time: "Mon-Sun 10:00AM - 10:00PM"
 		},
 		{
@@ -65,6 +66,7 @@ var bosses = {
 			address: "150 University Ave W, Waterloo",
 			phone: "519-580-6666",
 			description: "现金 10% Off",
+			imageUrl: "http://ituwcssa.com:5500/logos/lianhua.png",
 			time: "Mon-Fri: 11:00 am – 10:00 pm\
 			Sat-Sun: 12:00 pm – 10:00 pm"
 		},
@@ -73,6 +75,7 @@ var bosses = {
 			id: "sogo",
 			address: "170 University Ave W, Waterloo",
 			phone: "519-208-2188",
+			imageUrl: "http://ituwcssa.com:5500/logos/sogo.png",
 			description: "现金 10% Off",
 			time: "Mon-Sun: 10:00am-10:00pm"
 		},
@@ -323,7 +326,7 @@ var bosses = {
 			id: "huancai",
 			address: "62 Balsam St. H102，Waterloo",
 			phone: "226-929-0666",
-			description: "",
+			description: "10% Off",
 			time: "Monday - Friday 11am-7pm \
 			Saturday 10am-7pm \
 			Sunday 12pm-5pm",
@@ -334,7 +337,7 @@ var bosses = {
 			id: "ee",
 			address: "165 bathurst Dr Unit#5 N2V 1Z4, Waterloo",
 			phone: "519-888-8255",
-			description: "",
+			description: "洗车消费100以上减5刀，两人以上来店镀晶送挡风玻璃镀晶",
 			time: "11：30-20:00, TUE closed",
 			imageUrl:"http://ituwcssa.com:5500/logos/ee.png",
 		}
