@@ -27,7 +27,7 @@ var bosses = {
 				Sat: 11:00am-10:00pm\
 				Sun: Closed\
 				*July 1 - August 31: 4pm - 10pm",
-				description:"10% Off",
+				description:"Cash 10% Off",
 				phone:"519-886-2929",
 				imageUrl:"http://ituwcssa.com:5500/logos/bogda.png"
 			},
@@ -147,7 +147,7 @@ var bosses = {
 			title: "食德喜小馆 (China Garden) ",
 			address: "31 University Ave E, Waterloo",
 			phone: "519-888-0088",
-			description: "Over 25: Cash 10% Off",
+			description: "Over 25 $: Cash 10% Off",
 			imageUrl:"http://ituwcssa.com:5500/logos/shidexi.png",
 			time: "11am - 10pm, TUE closed"
 
