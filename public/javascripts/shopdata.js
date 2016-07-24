@@ -89,6 +89,14 @@ var bosses = {
 			time: "Mon-Fri: 11:00 am – 10:00 pm\
 			Sat-Sun: 12:00 pm – 10:00 pm"
 		},
+		{
+		 	title: "Ms. Salty Cake Boutique",
+			id: "salty",
+			address: "商业注册烘焙工作室，不设店面",
+			phone: "226-791-9691",
+			description: "主店微信mssalty购买，5% Off，随机加送两份小甜品，UW五公里内免费送餐",
+			imageUrl:"http://ituwcssa.com:5500/logos/salty.png",
+	 	},
 		// {
 		// 	title: "德庄(Morals Village)",
 		// 	id: "moral",
@@ -148,7 +156,7 @@ var bosses = {
 			id: "shidexi",
 			address: "31 University Ave E, Waterloo",
 			phone: "519-888-0088",
-			description: "Over 25 $: Cash 10% Off",
+			description: "Over $25: Cash 10% Off",
 			imageUrl:"http://ituwcssa.com:5500/logos/shidexi.png",
 			time: "11am - 10pm, TUE closed"
 
@@ -257,15 +265,6 @@ var bosses = {
 		description: "配件和冰球器材八五折，买原价新车赠送70元头盔或60元锁",
 		time: "",
 		imageUrl:"http://ituwcssa.com:5500/logos/mcphail.png",
-	 },
-	 {
-	 	title: "Ms. Salty Cake Boutique",
-		id: "salty",
-		address: "微信：mssalty",
-		phone: "226-791-9691",
-		description: "主店直购九五折+两份免费甜品；UW五公里内免费送餐",
-		time: "工作室，无实体店。",
-		imageUrl:"http://ituwcssa.com:5500/logos/salty.png",
 	 },
 	 {
 	 	title: "7 days Mini Mart (水城便利店）",
