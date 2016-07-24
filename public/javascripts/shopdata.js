@@ -145,6 +145,7 @@ var bosses = {
 		},
 		{
 			title: "食德喜小馆 (China Garden) ",
+			id: "shidexi",
 			address: "31 University Ave E, Waterloo",
 			phone: "519-888-0088",
 			description: "Over 25 $: Cash 10% Off",
