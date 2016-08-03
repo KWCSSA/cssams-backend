@@ -46,7 +46,7 @@ var bosses = {
 			id: "foodie",
 			address: "203 Lester St., Unit 7, Waterloo",
 			phone: "519-880-8688",
-			description: "10% Off (特价商品，代卖品牌和酒精饮料除外）",
+			description: "Cash 10% Off (特价商品，代卖品牌和酒精饮料除外）",
 			imageUrl:"http://ituwcssa.com:5500/logos/foodie.png",
 			time: "Sun - Thurs: 11:30am - 11:30pm \
 			Fri, Sat: 11:30am - 12:00am ",
