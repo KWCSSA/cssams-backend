@@ -190,7 +190,7 @@ var bosses = {
 			imageUrl:"http://ituwcssa.com:5500/logos/rsp.png"
 		},
 		{
-			title: "Rolling Peppers",
+			title: "Rolling Pepper",
 			id: "rollingpepper",
 			address:"Unit4, 2 King st North, Waterloo; King&Erb; The Waterloo Hotel First Floor",
 			time:"",
