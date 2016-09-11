@@ -340,6 +340,14 @@ var bosses = {
 			description: "洗车消费100以上减5刀，两人以上来店镀晶送挡风玻璃镀晶",
 			time: "11：30-20:00, TUE closed",
 			imageUrl:"http://ituwcssa.com:5500/logos/ee.png",
+		},
+		{
+			title: "Party Balloon",
+			id: "balloon",
+			phone: "647-546-9027",
+			description: "5% off，随机赠送一款气球装饰",
+			time: "www.partyballooncanada.com",
+			imageUrl:"http://ituwcssa.com:5500/logos/balloon.png",
 		}
 	]
 	
