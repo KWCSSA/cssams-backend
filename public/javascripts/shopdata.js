@@ -342,15 +342,6 @@ var bosses = {
 			imageUrl:"http://ituwcssa.com:5500/logos/ee.png",
 		},
 		{
-			title: "EE汽车美容",
-			id: "ee",
-			address: "165 bathurst Dr Unit#5 N2V 1Z4, Waterloo",
-			phone: "519-888-8255",
-			description: "洗车消费100以上减5刀，两人以上来店镀晶送挡风玻璃镀晶",
-			time: "11：30-20:00, TUE closed",
-			imageUrl:"http://ituwcssa.com:5500/logos/ee.png",
-		},
-		{
 			title: "Party Balloon",
 			id: "balloon",
 			address: "",
