@@ -345,7 +345,7 @@ var bosses = {
 			title: "Party Balloon",
 			id: "balloon",
 			address: "",
-			phone: "647-546-9027",
+			phone: "647-546-9027 WeChat: Party-Balloon",
 			description: "5% off，随机赠送一款气球装饰",
 			time: "www.partyballooncanada.com",
 			imageUrl:"http://ituwcssa.com:5500/logos/balloon.png",

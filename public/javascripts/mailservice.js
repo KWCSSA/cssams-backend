@@ -39,11 +39,5 @@ var mailService = {
 
 
 };
-// 		var user = {
-// 			firstName: 'Dian',
-// 			email: 'dean99dean@gmail.com',
-// 			username:'dean99dean',
-// 			password:'fuckyou'
-// 		};
-// mailService.sendWelcomeEmail(user);
+
 module.exports = mailService;
