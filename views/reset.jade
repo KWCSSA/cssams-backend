@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  img(src= "http://ituwcssa.com:5500/images/icon.png")
+  | <br><br><br><br><br>
+  form(method="POST", onsubmit="return validatePassword()")
+    legend Hey #{user.fname}, reset your password here. If it's not you, please shut the page up.
+    .form-group
+      label(for='password') New Password
+      input.form-control(type='password', name='password',id='pass', value='', placeholder='New password', autofocus=true)
+    .form-group
+      label(for='confirm') Confirm Password
+      input.form-control(type='password', name='confirm', id = 'cpass', value='', placeholder='Confirm password')
+    .form-group
+      button.btn.btn-primary(type='submit') Update Password
+  script(src="/javascripts/confirmPass.js")
