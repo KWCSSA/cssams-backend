@@ -25,7 +25,7 @@ var DBService = {
 	},
 
 	getInfo: function(email,cb) {
-		Account.findOne({email:email},function(err,uesr) {
+		Account.findOne({email:email},function(err,user) {
 			if(err) {
 				console.log(err);
 				cb(err, null);

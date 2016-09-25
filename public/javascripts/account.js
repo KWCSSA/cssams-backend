@@ -8,7 +8,9 @@ var Account = new Schema({
     email: { type: String, unique: true },
     fname: String,
     lname: String,
-    idnum: Number
+    idnum: Number,
+    passwordResetToken: String,
+    passwordResetExpires: Date
 });
 
 Account.plugin(passportLocalMongoose);

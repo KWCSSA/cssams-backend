@@ -78,7 +78,7 @@ router.post('/forgot', function (req,res,next){
       });
     },
     function(token, done) {
-      DBService.getInfo({ email: req.body.email }, function(err, user) {
+      Account.findOne({email:req.body.email},function(err,user) {
         if (!user) {
           return res.status(400).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account.' });
         }
@@ -92,13 +92,16 @@ router.post('/forgot', function (req,res,next){
     function(token, user, done) {
       res.json({success:true});
       console.log('user forgot password!');
-      mailService.sendResetPasswordEmail({email:user.email, resetToken:token});
+      mailService.sendResetPasswordEmail({email:user.email, resetToken:token, host:req.headers.host});
       done();
     }
   ]);
 });
 
 router.post('/reset/:token', function (req,res,next){
+  Account.findOne({ passwordResetToken: req.params.token },function(err,user) {
+    console.log(user);
+  })
    Account.findOne({ passwordResetToken: req.params.token })
      .where('passwordResetExpires').gt(Date.now())
      .exec(function(err, user) {
