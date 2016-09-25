@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var async = require('async');
+var crypto = require('crypto');
 var Account = require('../public/javascripts/account.js');
 var CardCreater = require('../public/javascripts/createCard.js');
 var DBService = require('../public/javascripts/dbservice.js');
@@ -10,7 +12,7 @@ var bosses = require('../public/javascripts/shopdata.js');
 var mailService = require('../public/javascripts/mailservice.js');
 var app = express();
 
-function pad(width, string, padding) { 
+function pad(width, string, padding) {
   return (width <= string.length) ? string : pad(width, padding + string, padding);
 }
 
@@ -19,7 +21,7 @@ router.post('/register',function(req,res,next) {
   var user_regdate = new Date(Date.now()).toISOString();
   var register_year = user_regdate.substring(0,4);
   //should define user_memid later!
-  
+
   DBService.getLastNumber(function(err,count) {
     if (err) console.log(err);
     var user_idnum = count + 1 + 1000;
@@ -44,7 +46,7 @@ router.post('/register',function(req,res,next) {
           username:req.body.username,
           password:req.body.password});
       }
-      
+
   });
 });
 });
@@ -67,6 +69,59 @@ router.post('/login', passport.authenticate('local', { session: false }),functio
 
 });
 
+router.post('/forgot', function (req,res,next){
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(16, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      DBService.getInfo({ email: req.body.email }, function(err, user) {
+        if (!user) {
+          return res.status(400).send({ msg: 'The email address ' + req.body.email + ' is not associated with any account.' });
+        }
+        user.passwordResetToken = token;
+        user.passwordResetExpires = Date.now() + 3600000; // expire in 1 hour
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+      res.json({success:true});
+      console.log('user forgot password!');
+      mailService.sendResetPasswordEmail({email:user.email, resetToken:token});
+      done();
+    }
+  ]);
+});
+
+router.post('/reset/:token', function (req,res,next){
+   Account.findOne({ passwordResetToken: req.params.token })
+     .where('passwordResetExpires').gt(Date.now())
+     .exec(function(err, user) {
+       if (!user) {
+         return res.status(400).send({ msg: 'Password reset token is invalid or has expired.' });
+       }
+       user.setPassword(req.body.password, function(){
+         user.passwordResetToken = undefined;
+         user.passwordResetExpires = undefined;
+         user.save(function(err){
+           if(err){
+             console.log(err);
+           }else{
+             res.json({success:true});
+             console.log('user reset password!');
+             mailService.sendConfirmationEmail({email:user.email});
+           }
+         });
+       });
+     });
+
+});
+
 router.get('/bosses', function (req,res,next) {
   res.json(bosses);
 });
@@ -82,13 +137,13 @@ console.log("GETTING THROUGH MIDDLEWARE");
   if (token) {
 
     // verifies secret and checks exp
-    jwt.verify(token, secret, function(err, decoded) {      
+    jwt.verify(token, secret, function(err, decoded) {
       if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });    
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
       } else {
         // if everything is good, save to request for use in other routes
        // console.log(JSON.stringify(decoded));
-        req.decoded = decoded;    
+        req.decoded = decoded;
         next();
       }
     });
@@ -97,11 +152,11 @@ console.log("GETTING THROUGH MIDDLEWARE");
 
     // if there is no token
     // return an error
-    return res.status(403).send({ 
-        success: false, 
-        message: 'No token provided.' 
+    return res.status(403).send({
+        success: false,
+        message: 'No token provided.'
     });
-    
+
   }
 });
 
@@ -121,7 +176,7 @@ router.get('/cardimage',function(req,res,next){
         }
 
     });
-   
+
   });
 
 });
@@ -133,7 +188,7 @@ router.get('/profile',function(req,res,next){
     if (err) console.log(err);
     console.log(JSON.stringify(user));
     res.json(user);
-   
+
   });
 
 });
