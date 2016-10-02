@@ -159,6 +159,10 @@ router.get('/reset/:token', function(req, res, next) {
   });
 });
 
+router.get('/bosses', function(req, res, next) {
+  res.json(bosses);
+}
+
 
 
 router.use(function(req, res, next) {
