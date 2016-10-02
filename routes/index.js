@@ -109,6 +109,7 @@ router.post('/forgot', function(req, res, next) {
       console.log('user forgot password!');
       mailService.sendResetPasswordEmail({
         email: user.email,
+        username: user.username,
         resetToken: token,
         host: req.headers.host
       });
