@@ -13,7 +13,6 @@ var app = express();
 var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var DBService = require('./public/javascripts/dbservice.js');
 
 //passport middleware
 app.use(passport.initialize());
