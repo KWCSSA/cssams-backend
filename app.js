@@ -13,6 +13,7 @@ var app = express();
 var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var DBService = require('./public/javascripts/dbservice.js');
 
 //passport middleware
 app.use(passport.initialize());
@@ -21,7 +22,6 @@ var Account = require('./public/javascripts/account');
 
 // use static authenticate method of model in LocalStrategy
 passport.use(Account.createStrategy());
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
