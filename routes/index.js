@@ -58,8 +58,7 @@ router.post('/register', function(req, res, next) {
   });
 });
 
-
-router.post('/login', passport.authenticate('local', {
+router.post('/login', isEmailOrUsername, passport.authenticate('local', {
   session: false
 }), function(req, res) {
   console.log('user logon!');
@@ -74,8 +73,6 @@ router.post('/login', passport.authenticate('local', {
     message: 'Enjoy your token!',
     token: token
   });
-
-
 });
 
 router.post('/forgot', function(req, res, next) {
@@ -226,7 +223,19 @@ router.get('/profile', function(req, res, next) {
   });
 });
 
-
+function isEmailOrUsername(req, res, next) {
+  if (req.body.email)
+      return next();
+  Account.findOne({username: req.body.username},function(err, user){
+    if (err) {
+      console.log(err);
+      return err;
+    } else{
+      req.body.email = user.email;
+      return next();
+    }
+  })
+}
 
 
 module.exports = router;
