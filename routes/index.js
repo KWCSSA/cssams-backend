@@ -27,6 +27,7 @@ router.post('/register', function(req, res, next) {
     var user_idnum = count + 1 + 1000;
     var user_memid_padding = register_year + pad(8, user_idnum, '0');
     Account.register(new Account({
+      username: req.body.username,
       fname: req.body.fname,
       lname: req.body.lname,
       email: req.body.email,
@@ -49,7 +50,6 @@ router.post('/register', function(req, res, next) {
           email: req.body.email
         });
       }
-
     });
   });
 });
@@ -235,7 +235,7 @@ function isEmailOrUsername(req, res, next) {
     }
     req.body.email = user.email;
     return next();
-  })
+  });
 }
 
 
