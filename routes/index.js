@@ -226,10 +226,15 @@ function isEmailOrUsername(req, res, next) {
     if (err) {
       console.log(err);
       return err;
-    } else{
-      req.body.email = user.email;
-      return next();
     }
+    if(!user){
+      return res.status(400).send({
+        success: false,
+        message: 'No user associated with this username/email.'
+      });
+    }
+    req.body.email = user.email;
+    return next();
   })
 }
 
