@@ -201,7 +201,7 @@ router.use(function(req, res, next) {
 
 router.get('/cardimage', function(req, res, next) {
   console.log("gettingImage!");
-  DBService.getUser(req.decoded._doc.username, function(err, user) {
+  DBService.getUserByEmail(req.decoded._doc.email, function(err, user) {
     if (err) console.log(err);
     console.log(JSON.stringify(user));
     CardCreater.createCard(user.fname, user.lname, user.idnum, function(err, data) {
@@ -219,7 +219,7 @@ router.get('/cardimage', function(req, res, next) {
 
 router.get('/profile', function(req, res, next) {
   console.log("gettingProfile!");
-  DBService.getUser(req.decoded._doc.username, function(err, user) {
+  DBService.getUserByEmail(req.decoded._doc.email, function(err, user) {
     if (err) console.log(err);
     console.log(JSON.stringify(user));
     res.json(user);
