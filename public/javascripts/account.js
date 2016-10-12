@@ -16,6 +16,7 @@ var Account = new Schema({
   passwordResetExpires: Date
 });
 
-Account.plugin(passportLocalMongoose);
+var options = ({usernameField: 'email'});
+Account.plugin(passportLocalMongoose, options);
 
 module.exports = mongoose.model('Account', Account);
