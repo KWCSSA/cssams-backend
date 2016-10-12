@@ -2,9 +2,9 @@ var Account = require('./account.js');
 
 
 var DBService = {
-  getUser: function(username, cb) {
+  getUser: function(email, cb) {
     Account.findOne({
-      username: username
+      email: email
     }, function(err, user) {
       if (err) {
         console.log(err);

@@ -27,11 +27,9 @@ router.post('/register', function(req, res, next) {
     var user_idnum = count + 1 + 1000;
     var user_memid_padding = register_year + pad(8, user_idnum, '0');
     Account.register(new Account({
-      username: req.body.username,
       fname: req.body.fname,
       lname: req.body.lname,
       email: req.body.email,
-      regdate: user_regdate,
       idnum: user_memid_padding
     }), req.body.password, function(err) {
       if (err) {
@@ -48,9 +46,7 @@ router.post('/register', function(req, res, next) {
         console.log('user registered!');
         mailService.sendWelcomeEmail({
           firstName: req.body.fname,
-          email: req.body.email,
-          username: req.body.username,
-          password: req.body.password
+          email: req.body.email
         });
       }
 
@@ -219,7 +215,7 @@ router.get('/cardimage', function(req, res, next) {
 
 router.get('/profile', function(req, res, next) {
   console.log("gettingProfile!");
-  DBService.getUser(req.decoded._doc.username, function(err, user) {
+  DBService.getUser(req.decoded._doc.email, function(err, user) {
     if (err) console.log(err);
     console.log(JSON.stringify(user));
     res.json(user);
