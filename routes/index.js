@@ -31,7 +31,6 @@ router.post('/register', function(req, res, next) {
       fname: req.body.fname,
       lname: req.body.lname,
       email: req.body.email,
-      regdate: user_regdate,
       idnum: user_memid_padding
     }), req.body.password, function(err) {
       if (err) {
@@ -48,18 +47,14 @@ router.post('/register', function(req, res, next) {
         console.log('user registered!');
         mailService.sendWelcomeEmail({
           firstName: req.body.fname,
-          email: req.body.email,
-          username: req.body.username,
-          password: req.body.password
+          email: req.body.email
         });
       }
-
     });
   });
 });
 
-
-router.post('/login', passport.authenticate('local', {
+router.post('/login', isEmailOrUsername, passport.authenticate('local', {
   session: false
 }), function(req, res) {
   console.log('user logon!');
@@ -74,8 +69,6 @@ router.post('/login', passport.authenticate('local', {
     message: 'Enjoy your token!',
     token: token
   });
-
-
 });
 
 router.post('/forgot', function(req, res, next) {
@@ -226,7 +219,24 @@ router.get('/profile', function(req, res, next) {
   });
 });
 
-
+function isEmailOrUsername(req, res, next) {
+  if (req.body.email)
+      return next();
+  Account.findOne({username: req.body.username},function(err, user){
+    if (err) {
+      console.log(err);
+      return err;
+    }
+    if(!user){
+      return res.status(400).send({
+        success: false,
+        message: 'No user associated with this username/email.'
+      });
+    }
+    req.body.email = user.email;
+    return next();
+  });
+}
 
 
 module.exports = router;
