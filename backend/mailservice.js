@@ -1,5 +1,5 @@
 var nodemailer = require('nodemailer');
-var smtpConfig = require('../../secret.js').smtpConfig;
+var smtpConfig = require('../secret.js').smtpConfig;
 var fs = require('fs');
 var ejs = require('ejs');
 var transporter = nodemailer.createTransport(smtpConfig);
@@ -8,7 +8,7 @@ var transporter = nodemailer.createTransport(smtpConfig);
 var mailService = {
 
   sendWelcomeEmail: function(user) {
-    var htmlStream = fs.createReadStream('public/javascripts/welcome.html');
+    var htmlStream = fs.createReadStream('backend/welcome.html');
     var data = '';
 
     htmlStream.on('data', function(chunk) {
@@ -21,7 +21,7 @@ var mailService = {
       var subject = ejs.render('Hello <%= firstName %>, 欢迎加入KWCSSA!', user);
 
       var mailOptions = {
-        from: '"Dian Tang" <it@uwcssa.com>', // sender address
+        from: '"KWCSSA IT department" <it@uwcssa.com>', // sender address
         to: user.email, // list of receivers
         subject: subject,
         html: text

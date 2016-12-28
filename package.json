@@ -16,6 +16,7 @@
     "debug": "~2.2.0",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
+    "file-stream-rotator": "0.0.7",
     "gm": "^1.23.0",
     "jade": "~1.11.0",
     "jsonwebtoken": "^5.7.0",
@@ -28,6 +29,8 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
     "serve-favicon": "^2.3.2",
-    "should": "^11.1.2"
+    "should": "^11.1.2",
+    "winston": "^2.3.0",
+    "winston-mongodb": "^2.0.6"
   }
 }

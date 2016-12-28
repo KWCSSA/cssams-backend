@@ -8,4 +8,3 @@ function validatePassword(){
     return true;
   }
 }
-

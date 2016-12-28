@@ -1,3 +1,5 @@
 node_modules
 secret.js
 public/cards/**
+log.log
+npm-debug.log

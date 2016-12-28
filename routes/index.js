@@ -3,13 +3,14 @@ var router = express.Router();
 var passport = require('passport');
 var async = require('async');
 var crypto = require('crypto');
-var Account = require('../public/javascripts/account.js');
-var CardCreater = require('../public/javascripts/createCard.js');
-var DBService = require('../public/javascripts/dbservice.js');
+var Account = require('../backend/account.js');
+var CardCreater = require('../backend/createCard.js');
+var DBService = require('../backend/dbservice.js');
 var jwt = require('jsonwebtoken');
 var secret = require('../secret.js').jwtSecret;
-var bosses = require('../public/javascripts/shopdata.js');
-var mailService = require('../public/javascripts/mailservice.js');
+var bosses = require('../backend/shopdata.js');
+var mailService = require('../backend/mailservice.js');
+var logger = require('../backend/logger.js');
 var app = express();
 
 function pad(width, string, padding) {
@@ -23,7 +24,7 @@ router.post('/register', function(req, res, next) {
   //should define user_memid later!
 
   DBService.getLastNumber(function(err, count) {
-    if (err) console.log(err);
+    if (err) logger.log('error', err);
     var user_idnum = count + 1 + 1000;
     var user_memid_padding = register_year + pad(8, user_idnum, '0');
     Account.register(new Account({
@@ -34,7 +35,7 @@ router.post('/register', function(req, res, next) {
       idnum: user_memid_padding
     }), req.body.password, function(err) {
       if (err) {
-        console.log('error while user register!', err);
+        logger.log('error', 'error while user register!', err);
         res.json({
           success: false,
           Message: err
@@ -44,7 +45,7 @@ router.post('/register', function(req, res, next) {
         res.json({
           success: true
         });
-        console.log('user registered!');
+        console.log('info','user registered!');
         mailService.sendWelcomeEmail({
           firstName: req.body.fname,
           email: req.body.email
@@ -57,9 +58,7 @@ router.post('/register', function(req, res, next) {
 router.post('/login', isEmailOrUsername, passport.authenticate('local', {
   session: false
 }), function(req, res) {
-  console.log('user logon!');
-  console.log(req.user);
-
+  logger.log('info',req.user.email+" logon!");
   var token = jwt.sign(req.user, secret, {
     expiresIn: '365d' // expires in 365 days
   });
@@ -193,29 +192,30 @@ router.use(function(req, res, next) {
 
 
 router.get('/cardimage', function(req, res, next) {
-  console.log("gettingImage!");
   DBService.getUserByEmail(req.decoded._doc.email, function(err, user) {
-    if (err) console.log(err);
-    console.log(JSON.stringify(user));
-    CardCreater.createCard(user.fname, user.lname, user.idnum, function(err, data) {
-      if (err) console.log(err);
-      else {
-        console.log(data);
-        res.json({
-          imageURL: data.imageURL,
-          imageName: data.imageName
-        });
-      }
-    });
+    logger.log('info', user.idnum + " getting Image!");
+    if (err) logger.log('error', err);
+    else {
+      CardCreater.createCard(user.fname, user.lname, user.idnum, function(err, data) {
+        if (err) console.log(err);
+        else {
+          console.log(data);
+          res.json({
+            imageURL: data.imageURL,
+            imageName: data.imageName
+          });
+        }
+      });
+    }
   });
 });
 
 router.get('/profile', function(req, res, next) {
-  console.log("gettingProfile!");
+  
   DBService.getUserByEmail(req.decoded._doc.email, function(err, user) {
-    if (err) console.log(err);
-    console.log(JSON.stringify(user));
-    res.json(user);
+    logger.log('info', user.idnum + " getting user profile!");
+    if (err) logger.log('error', err);
+    else res.json(user);
   });
 });
 
