@@ -3,3 +3,4 @@ secret.js
 public/cards/**
 winston.log
 npm-debug.log
+log
