@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var PostingSchema = new Schema({
   user: { type: Number, ref: 'Account' }
   content: String,
-  likes: Number,
+  likes: [{ type: Number, ref: 'Account' }],
   anonName: String,
   createdAt: { type: Date, default: Date.now },
   replies: [{
