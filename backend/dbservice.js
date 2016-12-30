@@ -1,5 +1,5 @@
 var Account = require('./account.js');
-
+var logger = require('./logger.js');
 
 var DBService = {
   getUserByEmail: function(email, cb) {
@@ -7,7 +7,7 @@ var DBService = {
       email: email
     }, function(err, user) {
       if (err) {
-        console.log(err);
+        logger.log('error',err);
         cb(err, null);
       } else cb(null, user);
 
@@ -17,15 +17,15 @@ var DBService = {
   getLastNumber: function(cb) {
     Account.count({}, function(err, count) {
       if (err) {
-        console.log(err);
+        logger.log('error',err);
         cb(err, null);
       }
-      console.log('number of students is ' + count);
-      cb(null, count);
+      else {
+        console.log('number of students is ' + count);
+        cb(null, count);
+      }
     });
   },
 };
-
-
 
 module.exports = DBService;
