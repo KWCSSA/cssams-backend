@@ -24,6 +24,7 @@ router.use(function(req, res, next) {
       } else {
         // if everything is good, save to request for use in other routes
         DBService.getUserByEmail(decoded._doc.email, function(err, user) {
+          if (err) return handleError(res, err);
           req.user = user;
           next();
         });
@@ -50,7 +51,7 @@ router.get('/', function(req, res, next) {
   sort({createdAt: -1});
 
   query.exec(function(err, postings) {
-    if (err) return logger.log('error', err);
+    if (err) return handleError(res, err);
     res.json(postings);
   });
 });
@@ -68,7 +69,7 @@ router.post('/', function(req, res, next) {
     content: req.body.content
   });
   posting.save(function (err, posting) {
-    if (err) return logger.log('error', err);
+    if (err) return handleError(res, err);
     res.json({
       success: true
     });
@@ -77,7 +78,10 @@ router.post('/', function(req, res, next) {
 
 /* GET one posting. */
 router.get('/:id', function(req, res, next) {
-	
+	Posting.findOne({_id:req.params.id}, function(err, posting) {
+    if(err) return handleError(res, err);
+    res.json(posting);
+  });
 });
 
 /* PUT one posting. 
@@ -85,13 +89,28 @@ body: {
 	content: String,
 }
 */
+/* This action may cause confusion to others, disable for now
 router.put('/:id', function(req, res, next) {
-	
+	Posting.update({_id:req.params.id}, {
+    content: req.body.content
+  },function (err) {
+     if(err) return handleError(res, err);
+     res.json({
+       success:true
+     });
+    }
+  );
 });
+*/
 
 /* DELETE one posting. */
 router.delete('/:id', function(req, res, next) {
-	
+	Posting.remove({_id:req.params.id}, function(err) {
+    if(err) return handleError(res, err);
+    res.json({
+      success: true
+    });
+  });
 });
 
 /* POST a like. 
@@ -115,6 +134,14 @@ router.post('/reply/:id', function(req, res, next) {
 router.delete('/reply/:id/:rid', function(req, res, next) {
 	
 });
+
+function handleError(res, err) {
+  logger.log('error', err);
+  res.status(400).send({
+    success: false,
+    msg: err
+  })
+}
 
 module.exports = router;
 
