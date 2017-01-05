@@ -44,7 +44,15 @@ router.use(function(req, res, next) {
 
 /* GET self postings. */
 router.get('/', function(req, res, next) {
+  var query = Posting.find({
+    user:req.user.idnum
+  }).
+  sort({createdAt: -1});
 
+  query.exec(function(err, postings) {
+    if (err) return logger.log('error', err);
+    res.json(postings);
+  });
 });
 
 /* POST posting. 
@@ -55,18 +63,15 @@ body: {
 router.post('/', function(req, res, next) {
   // Assume content is legal. Should do exception handling in the future.
   // Implement anonymous in the future.
-  console.log(JSON.stringify(req.body));
   var posting = new Posting({
     user: req.user.idnum,
     content: req.body.content
   });
   posting.save(function (err, posting) {
-    if (err) logger.log('error', err);
-    else {
-      res.json({
-        success: true
-      });
-    }
+    if (err) return logger.log('error', err);
+    res.json({
+      success: true
+    });
   });
 });
 
