@@ -168,14 +168,16 @@ router.use(function(req, res, next) {
     // verifies secret and checks exp
     jwt.verify(token, secret, function(err, decoded) {
       if (err) {
-        return res.json({
+        return res.status(403).send({
           success: false,
           message: 'Failed to authenticate token.'
         });
       } else {
         // if everything is good, save to request for use in other routes
-        req.decoded = decoded;
-        next();
+        DBService.getUserByEmail(decoded._doc.email, function(err, user) {
+          req.user = user;
+          next();
+        });
       }
     });
 
@@ -192,31 +194,23 @@ router.use(function(req, res, next) {
 
 
 router.get('/cardimage', function(req, res, next) {
-  DBService.getUserByEmail(req.decoded._doc.email, function(err, user) {
-    logger.log('info', user.idnum + " getting Image!");
-    if (err) logger.log('error', err);
+  var user = req.user;
+  logger.log('info', user.idnum + " getting Image!");
+  CardCreater.createCard(user.fname, user.lname, user.idnum, function(err, data) {
+    if (err) console.log(err);
     else {
-      CardCreater.createCard(user.fname, user.lname, user.idnum, function(err, data) {
-        if (err) console.log(err);
-        else {
-          console.log(data);
-          res.json({
-            imageURL: data.imageURL,
-            imageName: data.imageName
-          });
-        }
+      console.log(data);
+      res.json({
+        imageURL: data.imageURL,
+        imageName: data.imageName
       });
     }
   });
 });
 
 router.get('/profile', function(req, res, next) {
-  
-  DBService.getUserByEmail(req.decoded._doc.email, function(err, user) {
-    logger.log('info', user.idnum + " getting user profile!");
-    if (err) logger.log('error', err);
-    else res.json(user);
-  });
+  var user = req.user;
+  res.json(user);
 });
 
 function isEmailOrUsername(req, res, next) {

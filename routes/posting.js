@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var Posting = require('../backend/models/posting.js');
 var logger = require('../backend/services/logger.js');
+var DBService = require('../backend/services/dbservice.js');
+var jwt = require('jsonwebtoken');
+var secret = require('../secret.js').jwtSecret;
 
 /* Middleware here to authenticate and identify user */
 router.use(function(req, res, next) {
@@ -19,8 +23,10 @@ router.use(function(req, res, next) {
         });
       } else {
         // if everything is good, save to request for use in other routes
-        req.decoded = decoded;
-        next();
+        DBService.getUserByEmail(decoded._doc.email, function(err, user) {
+          req.user = user;
+          next();
+        });
       }
     });
 
@@ -47,7 +53,21 @@ body: {
 }
 */
 router.post('/', function(req, res, next) {
-	
+  // Assume content is legal. Should do exception handling in the future.
+  // Implement anonymous in the future.
+  console.log(JSON.stringify(req.body));
+  var posting = new Posting({
+    user: req.user.idnum,
+    content: req.body.content
+  });
+  posting.save(function (err, posting) {
+    if (err) logger.log('error', err);
+    else {
+      res.json({
+        success: true
+      });
+    }
+  });
 });
 
 /* GET one posting. */

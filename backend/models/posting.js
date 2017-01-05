@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 
 var PostingSchema = new Schema({
-  user: { type: Number, ref: 'Account' }
+  user: { type: Number, ref: 'Account' },
   content: String,
   likes: [{ type: Number, ref: 'Account' }],
   anonName: String,
