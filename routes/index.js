@@ -3,14 +3,14 @@ var router = express.Router();
 var passport = require('passport');
 var async = require('async');
 var crypto = require('crypto');
-var Account = require('../backend/account.js');
-var CardCreater = require('../backend/createCard.js');
-var DBService = require('../backend/dbservice.js');
+var Account = require('../backend/models/account.js');
+var CardCreater = require('../backend/services/createCard.js');
+var DBService = require('../backend/services/dbservice.js');
 var jwt = require('jsonwebtoken');
 var secret = require('../secret.js').jwtSecret;
 var bosses = require('../backend/shopdata.js');
-var mailService = require('../backend/mailservice.js');
-var logger = require('../backend/logger.js');
+var mailService = require('../backend/services/mailservice.js');
+var logger = require('../backend/services/logger.js');
 var app = express();
 
 function pad(width, string, padding) {

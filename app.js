@@ -21,7 +21,7 @@ var LocalStrategy = require('passport-local').Strategy;
 //passport middleware
 app.use(passport.initialize());
 // requires the model with Passport-Local Mongoose plugged in
-var Account = require('./backend/account');
+var Account = require('./backend/models/account');
 
 // use static authenticate method of model in LocalStrategy
 passport.use(Account.createStrategy());

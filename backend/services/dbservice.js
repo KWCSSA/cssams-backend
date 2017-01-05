@@ -1,4 +1,4 @@
-var Account = require('./account.js');
+var Account = require('../models/account.js');
 var logger = require('./logger.js');
 
 var DBService = {

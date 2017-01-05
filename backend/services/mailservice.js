@@ -1,5 +1,5 @@
 var nodemailer = require('nodemailer');
-var smtpConfig = require('../secret.js').smtpConfig;
+var smtpConfig = require('../../secret.js').smtpConfig;
 var fs = require('fs');
 var ejs = require('ejs');
 var transporter = nodemailer.createTransport(smtpConfig);

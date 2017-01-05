@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var logger = require('../backend/logger.js');
+var logger = require('../backend/services/logger.js');
 
 /* Middleware here to authenticate and identify user */
 router.use(function(req, res, next) {
@@ -90,5 +90,7 @@ router.post('/reply/:id', function(req, res, next) {
 router.delete('/reply/:id/:rid', function(req, res, next) {
 	
 });
+
+module.exports = router;
 
 
