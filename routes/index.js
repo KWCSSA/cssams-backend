@@ -159,7 +159,6 @@ router.get('/bosses', function(req, res, next) {
 
 
 router.use(function(req, res, next) {
-  console.log("GETTING THROUGH MIDDLEWARE");
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
