@@ -3,14 +3,14 @@ var router = express.Router();
 var passport = require('passport');
 var async = require('async');
 var crypto = require('crypto');
-var Account = require('../backend/account.js');
-var CardCreater = require('../backend/createCard.js');
-var DBService = require('../backend/dbservice.js');
+var Account = require('../backend/models/account.js');
+var CardCreater = require('../backend/services/createCard.js');
+var DBService = require('../backend/services/dbservice.js');
 var jwt = require('jsonwebtoken');
 var secret = require('../secret.js').jwtSecret;
 var bosses = require('../backend/shopdata.js');
-var mailService = require('../backend/mailservice.js');
-var logger = require('../backend/logger.js');
+var mailService = require('../backend/services/mailservice.js');
+var logger = require('../backend/services/logger.js');
 var app = express();
 
 function pad(width, string, padding) {
@@ -159,7 +159,6 @@ router.get('/bosses', function(req, res, next) {
 
 
 router.use(function(req, res, next) {
-  console.log("GETTING THROUGH MIDDLEWARE");
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
@@ -168,14 +167,16 @@ router.use(function(req, res, next) {
     // verifies secret and checks exp
     jwt.verify(token, secret, function(err, decoded) {
       if (err) {
-        return res.json({
+        return res.status(403).send({
           success: false,
           message: 'Failed to authenticate token.'
         });
       } else {
         // if everything is good, save to request for use in other routes
-        req.decoded = decoded;
-        next();
+        DBService.getUserByEmail(decoded._doc.email, function(err, user) {
+          req.user = user;
+          next();
+        });
       }
     });
 
@@ -192,31 +193,23 @@ router.use(function(req, res, next) {
 
 
 router.get('/cardimage', function(req, res, next) {
-  DBService.getUserByEmail(req.decoded._doc.email, function(err, user) {
-    logger.log('info', user.idnum + " getting Image!");
-    if (err) logger.log('error', err);
+  var user = req.user;
+  logger.log('info', user.idnum + " getting Image!");
+  CardCreater.createCard(user.fname, user.lname, user.idnum, function(err, data) {
+    if (err) console.log(err);
     else {
-      CardCreater.createCard(user.fname, user.lname, user.idnum, function(err, data) {
-        if (err) console.log(err);
-        else {
-          console.log(data);
-          res.json({
-            imageURL: data.imageURL,
-            imageName: data.imageName
-          });
-        }
+      console.log(data);
+      res.json({
+        imageURL: data.imageURL,
+        imageName: data.imageName
       });
     }
   });
 });
 
 router.get('/profile', function(req, res, next) {
-  
-  DBService.getUserByEmail(req.decoded._doc.email, function(err, user) {
-    logger.log('info', user.idnum + " getting user profile!");
-    if (err) logger.log('error', err);
-    else res.json(user);
-  });
+  var user = req.user;
+  res.json(user);
 });
 
 function isEmailOrUsername(req, res, next) {
@@ -227,7 +220,7 @@ function isEmailOrUsername(req, res, next) {
       console.log(err);
       return err;
     }
-    if(!user){
+    if (!user) {
       return res.status(400).send({
         success: false,
         message: 'No user associated with this username/email.'

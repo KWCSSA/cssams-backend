@@ -8,7 +8,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
+var posting = require('./routes/posting');
+var feed = require('./routes/feed');
 var jwt    = require('jsonwebtoken');
 var app = express();
 
@@ -19,7 +21,7 @@ var LocalStrategy = require('passport-local').Strategy;
 //passport middleware
 app.use(passport.initialize());
 // requires the model with Passport-Local Mongoose plugged in
-var Account = require('./backend/account');
+var Account = require('./backend/models/account');
 
 // use static authenticate method of model in LocalStrategy
 passport.use(Account.createStrategy());
@@ -63,7 +65,9 @@ mongoose.connect('mongodb://localhost/cssams', function(err) {
 
 //register routes
 app.use('/', routes);
-app.use('/users', users);
+app.use('/user', user);
+app.use('/posting', posting);
+app.use('/feed', feed);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
