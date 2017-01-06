@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Posting = require('../backend/models/posting.js');
+var Account = require('../backend/models/account.js');
 var logger = require('../backend/services/logger.js');
 var DBService = require('../backend/services/dbservice.js');
 var jwt = require('jsonwebtoken');
@@ -45,8 +46,11 @@ router.use(function(req, res, next) {
 /* GET self postings. */
 router.get('/', function(req, res, next) {
   var query = Posting.find({
-    user:req.user.idnum
+    user: req.user._id
   }).
+  select('content replies likes createdAt').
+  populate('likes','idnum').
+  populate('replies.user', 'fname lname idnum').
   sort({createdAt: -1});
 
   query.exec(function(err, postings) {
@@ -64,7 +68,7 @@ router.post('/', function(req, res, next) {
   // Assume content is legal. Should do exception handling in the future.
   // Implement anonymous in the future.
   var posting = new Posting({
-    user: req.user.idnum,
+    user: req.user._id,
     content: req.body.content
   });
   posting.save(function (err, posting) {
@@ -104,7 +108,7 @@ router.put('/:id', function(req, res, next) {
 
 /* DELETE one posting. */
 router.delete('/:id', function(req, res, next) {
-	Posting.remove({_id:req.params.id}, function(err) {
+	Posting.remove({_id: req.params.id}, function(err) {
     if(err) return handleError(res, err);
     res.json({
       success: true
@@ -118,14 +122,14 @@ check whether the user has liked or not
 router.post('/:id/like', function(req, res, next) {
 	Posting.findOne({_id:req.params.id}, function(err, posting) {
     if(err) return handleError(res, err);
-    if(posting.likes.indexOf(req.user.idnum) != -1) {
+    if(posting.likes.indexOf(req.user._id) != -1) {
       res.status(400).send({
         success: false,
         msg: "ERROR User " + req.user.idnum + " has already liked this posting."
       });
     }
     else {
-      posting.likes.push(req.user.idnum);
+      posting.likes.push(req.user._id);
       posting.save(function(err, posting) {
         if(err) return handleError(res, err);
         res.json({
@@ -140,7 +144,7 @@ router.post('/:id/like', function(req, res, next) {
 router.delete('/:id/like', function(req, res, next) {
   Posting.findOne({_id:req.params.id}, function(err, posting) {
     if(err) return handleError(res, err);
-    var index = posting.likes.indexOf(req.user.idnum);
+    var index = posting.likes.indexOf(req.user._id);
     if (index == -1) {
       res.status(400).send({
         success: false,
@@ -168,7 +172,7 @@ router.post('/:id/reply', function(req, res, next) {
     if (posting.replies.length == 0) rid = 0;
     else rid = posting.replies[posting.replies.length-1].rid + 1;
     var reply = {
-      user: req.user.idnum,
+      user: req.user._id,
       content: req.body.content,
       rid: rid
     }
@@ -198,7 +202,7 @@ router.delete('/:id/reply/:rid', function(req, res, next) {
       }
     }
     if (!notFound) {
-      if (posting.replies[counter].user != req.user.idnum) {
+      if (posting.replies[counter].user != req.user._id) {
         return res.status(403).send({
           success: false,
           msg: "Not authorized to do so"

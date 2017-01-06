@@ -220,7 +220,7 @@ function isEmailOrUsername(req, res, next) {
       console.log(err);
       return err;
     }
-    if(!user){
+    if (!user) {
       return res.status(400).send({
         success: false,
         message: 'No user associated with this username/email.'
