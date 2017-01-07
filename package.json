@@ -20,6 +20,7 @@
     "gm": "^1.23.0",
     "jade": "~1.11.0",
     "jsonwebtoken": "^5.7.0",
+    "letsencrypt-express": "^2.0.5",
     "mocha": "^3.2.0",
     "mongoose": "^4.7.5",
     "morgan": "^1.7.0",

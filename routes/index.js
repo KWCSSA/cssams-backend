@@ -66,7 +66,8 @@ router.post('/login', isEmailOrUsername, passport.authenticate('local', {
   res.json({
     success: true,
     message: 'Enjoy your token!',
-    token: token
+    token: token,
+    _id: req.user._id
   });
 });
 
