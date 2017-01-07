@@ -49,7 +49,6 @@ router.get('/', function(req, res, next) {
     user: req.user._id
   }).
   select('content replies likes createdAt').
-  populate('likes','idnum').
   populate('replies.user', 'fname lname idnum').
   sort({createdAt: -1});
 
