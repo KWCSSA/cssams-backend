@@ -80,7 +80,11 @@ router.post('/', function(req, res, next) {
 
 /* GET one posting. */
 router.get('/:id', function(req, res, next) {
-	Posting.findOne({_id:req.params.id}, function(err, posting) {
+	var query = Posting.findOne({_id:req.params.id}).
+  populate('user', 'fname lname idnum').
+  populate('replies.user', 'fname lname idnum');
+
+  query.exec(function(err, posting) {
     if(err) return handleError(res, err);
     res.json(posting);
   });
