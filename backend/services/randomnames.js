@@ -66,4 +66,4 @@ var getRandomName = function(){
   return fullname;
 };
 
-console.log(getRandomName());
+module.exports = getRandomName;
