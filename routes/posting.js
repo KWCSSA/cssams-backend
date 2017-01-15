@@ -6,6 +6,7 @@ var logger = require('../backend/services/logger.js');
 var DBService = require('../backend/services/dbservice.js');
 var jwt = require('jsonwebtoken');
 var secret = require('../secret.js').jwtSecret;
+var getRandomName = require('../backend/services/randomnames.js');
 
 /* Middleware here to authenticate and identify user */
 router.use(function(req, res, next) {
@@ -59,7 +60,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-/* POST posting. 
+/* POST posting.
 body: {
 	content: String,
 }
@@ -67,12 +68,17 @@ body: {
 router.post('/', function(req, res, next) {
   // Assume content is legal. Should do exception handling in the future.
   // Implement anonymous in the future.
+  var randName = getRandomName();
+  var display = req.body.isAnon ? randName : undefined;
   var posting = new Posting({
     user: req.user._id,
-    content: req.body.content
+    content: req.body.content,
+    isAnon: req.body.isAnon,
+    anonName: display
   });
   posting.save(function (err, posting) {
     if (err) return handleError(res, err);
+    console.log(posting);
     res.json({
       success: true
     });
@@ -87,7 +93,7 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
-/* PUT one posting. 
+/* PUT one posting.
 body: {
 	content: String,
 }
@@ -116,7 +122,7 @@ router.delete('/:id', function(req, res, next) {
   });
 });
 
-/* POST a like. 
+/* POST a like.
 check whether the user has liked or not
 */
 router.post('/:id/like', function(req, res, next) {
@@ -234,5 +240,3 @@ function handleError(res, err) {
 }
 
 module.exports = router;
-
-
