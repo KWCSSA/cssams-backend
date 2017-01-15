@@ -51,7 +51,7 @@ router.get('/', function(req, res, next) {
   }).
   select('content replies likes createdAt').
   populate('likes','idnum').
-  populate('replies.user', 'fname lname idnum').
+  populate('replies.user', 'anonName fname lname idnum').
   sort({createdAt: -1});
 
   query.exec(function(err, postings) {
@@ -177,9 +177,15 @@ router.post('/:id/reply', function(req, res, next) {
     //assign rid to the last reply's id + 1
     if (posting.replies.length == 0) rid = 0;
     else rid = posting.replies[posting.replies.length-1].rid + 1;
+
+    var randName = getRandomName();
+    var display = req.body.isAnon ? randName : undefined;
+
     var reply = {
       user: req.user._id,
       content: req.body.content,
+      isAnon: req.body.isAnon,
+      anonName: display,
       rid: rid
     }
     posting.replies.push(reply);
