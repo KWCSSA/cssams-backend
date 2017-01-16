@@ -237,5 +237,13 @@ function isEmailOrUsername(req, res, next) {
   });
 }
 
+function handleError(res, err) {
+  logger.log('error', err);
+  res.status(400).send({
+    success: false,
+    msg: err
+  })
+}
+
 
 module.exports = router;
