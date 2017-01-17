@@ -52,7 +52,7 @@ var right = ["albattani","allen","almeida","agnesi","archimedes",
             "wozniak","wright","yalow","yonath"
 ];
 
-var getRandomName = function(){
+var getRandomName = function() {
   var adjIndex = Math.floor(Math.random() * left.length) + 1;
   var surnameIndex = Math.floor(Math.random() * right.length) + 1;
 

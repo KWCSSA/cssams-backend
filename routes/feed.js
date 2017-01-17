@@ -24,11 +24,19 @@ router.get('/', function(req, res, next) {
     if (err) {
       logger.log('error', err);
     } else {
+<<<<<<< HEAD
       postings.forEach(function(post) {
         if (post.isAnon == true) {
           post.user = null;
           post.replies.forEach(function(reply) {
             if (reply.isAnon == true) {
+=======
+      postings.forEach(function(post){
+        if(post.isAnon == true){
+          post.user = null;
+          post.replies.forEach(function(reply) {
+            if(reply.isAnon == true){
+>>>>>>> d16c47971862da20f559c561ef82a2e8f29b895d
               reply.user = null;
             }
           });
