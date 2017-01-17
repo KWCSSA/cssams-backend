@@ -52,6 +52,7 @@ router.get('/', function(req, res, next) {
   select('content replies likes createdAt').
   populate('likes','idnum').
   populate('replies.user', 'anonName fname lname idnum').
+  populate('replies.user', 'fname lname idnum').
   sort({createdAt: -1});
 
   query.exec(function(err, postings) {
@@ -107,6 +108,13 @@ router.get('/:id', function(req, res, next) {
       }
       res.json(posting);
     }
+	var query = Posting.findOne({_id:req.params.id}).
+  populate('user', 'fname lname idnum').
+  populate('replies.user', 'fname lname idnum');
+
+  query.exec(function(err, posting) {
+    if(err) return handleError(res, err);
+    res.json(posting);
   });
 });
 

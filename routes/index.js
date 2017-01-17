@@ -59,15 +59,21 @@ router.post('/login', isEmailOrUsername, passport.authenticate('local', {
   session: false
 }), function(req, res) {
   logger.log('info',req.user.email+" logon!");
+
   var token = jwt.sign(req.user, secret, {
     expiresIn: '365d' // expires in 365 days
   });
-  // return the information including token as JSON
-  res.json({
-    success: true,
-    message: 'Enjoy your token!',
-    token: token
-  });
+
+  req.user.deviceToken = req.body.dToken;
+  req.user.save(function (err, user) {
+      if (err) return handleError(res, err);
+      res.json({
+        success: true,
+        message: 'Enjoy your token!',
+        token: token,
+        _id: req.user._id
+      });
+    });
 });
 
 router.post('/forgot', function(req, res, next) {
@@ -228,6 +234,14 @@ function isEmailOrUsername(req, res, next) {
     req.body.email = user.email;
     return next();
   });
+}
+
+function handleError(res, err) {
+  logger.log('error', err);
+  res.status(400).send({
+    success: false,
+    msg: err
+  })
 }
 
 
