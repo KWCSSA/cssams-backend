@@ -87,19 +87,18 @@ router.post('/', function(req, res, next) {
 
 /* GET one posting. */
 router.get('/:id', function(req, res, next) {
-  var query = Posting.find({_id:req.params.id}).
+  var query = Posting.findOne({_id:req.params.id}).
   populate('user', 'fname lname idnum').
   populate('likes','idnum').
   populate('replies.user', 'fname lname idnum');
 
   query.exec(function(err, posting) {
-    var head = posting[0];
     if (err) {
       return handleError(res, err);
     } else {
-      if (head.isAnon == true) {
-        head.user = null;
-        head.replies.forEach(function(reply) {
+      if (posting.isAnon == true) {
+        posting.user = null;
+        posting.replies.forEach(function(reply) {
           if (reply.isAnon == true) {
             reply.user = null;
           }
