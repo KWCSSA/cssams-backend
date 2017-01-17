@@ -107,6 +107,7 @@ router.get('/:id', function(req, res, next) {
       }
       res.json(posting);
     }
+  });
 });
 
 /* PUT one posting.
