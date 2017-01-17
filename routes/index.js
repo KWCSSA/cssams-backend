@@ -24,7 +24,7 @@ router.post('/register', function(req, res, next) {
   //should define user_memid later!
 
   DBService.getLastNumber(function(err, count) {
-    if (err) logger.log('error', err);
+    if (err) return logger.log('error', err);
     var user_idnum = count + 1 + 1000;
     var user_memid_padding = register_year + pad(8, user_idnum, '0');
     Account.register(new Account({

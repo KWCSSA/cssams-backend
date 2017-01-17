@@ -87,17 +87,21 @@ router.post('/', function(req, res, next) {
 
 /* GET one posting. */
 router.get('/:id', function(req, res, next) {
-  /*var query = Posting.find({_id:req.params.id}).
-                      populate('user', 'anonName fname lname idnum').
-                      populate('likes','idnum').
-                      populate('replies.user', 'anonName fname lname idnum');
+  var query = Posting.findOne({_id:req.params.id}).
+                      populate('user', 'fname lname idnum').
+                      populate('likes', 'idnum').
+                      populate('replies.user', 'fname lname idnum');
 
-  query.exec(function(err, posting){
-    if(err) return handleError(res, err);
-    res.json(posting);
-  });*/
-	Posting.findOne({_id:req.params.id}, function(err, posting) {
-    if(err) return handleError(res, err);
+  query.exec(function(err, posting) {
+    if (err) return handleError(res, err);
+    if (posting.isAnon == true) {
+      posting.user = null;
+      posting.replies.forEach(function(reply) {
+        if (reply.isAnon == true) {
+          reply.user = null;
+        }
+      });
+    }
     res.json(posting);
   });
 });
@@ -124,7 +128,7 @@ router.put('/:id', function(req, res, next) {
 /* DELETE one posting. */
 router.delete('/:id', function(req, res, next) {
 	Posting.remove({_id: req.params.id}, function(err) {
-    if(err) return handleError(res, err);
+    if (err) return handleError(res, err);
     res.json({
       success: true
     });
@@ -136,14 +140,13 @@ check whether the user has liked or not
 */
 router.post('/:id/like', function(req, res, next) {
 	Posting.findOne({_id:req.params.id}, function(err, posting) {
-    if(err) return handleError(res, err);
-    if(posting.likes.indexOf(req.user._id) != -1) {
+    if (err) return handleError(res, err);
+    if (posting.likes.indexOf(req.user._id) != -1) {
       res.status(400).send({
         success: false,
         msg: "ERROR User " + req.user.idnum + " has already liked this posting."
       });
-    }
-    else {
+    } else {
       posting.likes.push(req.user._id);
       posting.save(function(err, posting) {
         if(err) return handleError(res, err);
@@ -158,15 +161,14 @@ router.post('/:id/like', function(req, res, next) {
 /* DELETE a like. */
 router.delete('/:id/like', function(req, res, next) {
   Posting.findOne({_id:req.params.id}, function(err, posting) {
-    if(err) return handleError(res, err);
+    if (err) return handleError(res, err);
     var index = posting.likes.indexOf(req.user._id);
     if (index == -1) {
       res.status(400).send({
         success: false,
         msg: "ERROR User " + req.user.idnum + " has never ever liked this posting."
       });
-    }
-    else {
+    } else {
       posting.likes.splice(index, 1);
       posting.save(function(err, posting) {
         if(err) return handleError(res, err);
@@ -199,7 +201,7 @@ router.post('/:id/reply', function(req, res, next) {
     }
     posting.replies.push(reply);
     posting.save(function(err, posting) {
-      if(err) return handleError(res, err);
+      if (err) return handleError(res, err);
       res.json({
         success: true
       });
@@ -236,8 +238,7 @@ router.delete('/:id/reply/:rid', function(req, res, next) {
           success: true
         });
       });
-    }
-    else {
+    } else {
       res.status(400).send({
         success: false,
         msg: "reply not found"
