@@ -87,7 +87,6 @@ router.post('/', function(req, res, next) {
 
 /* GET one posting. */
 router.get('/:id', function(req, res, next) {
-<<<<<<< HEAD
   var query = Posting.find({_id:req.params.id}).
   populate('user', 'fname lname idnum').
   populate('likes','idnum').
@@ -108,25 +107,6 @@ router.get('/:id', function(req, res, next) {
       }
       res.json(posting);
     }
-=======
-  var query = Posting.findOne({_id:req.params.id}).
-                      populate('user', 'fname lname idnum').
-                      populate('likes', 'idnum').
-                      populate('replies.user', 'fname lname idnum');
-
-  query.exec(function(err, posting) {
-    if (err) return handleError(res, err);
-    if (posting.isAnon == true) {
-      posting.user = null;
-      posting.replies.forEach(function(reply) {
-        if (reply.isAnon == true) {
-          reply.user = null;
-        }
-      });
-    }
-    res.json(posting);
->>>>>>> d16c47971862da20f559c561ef82a2e8f29b895d
-  });
 });
 
 /* PUT one posting.
