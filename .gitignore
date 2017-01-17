@@ -4,3 +4,4 @@ public/cards/**
 winston.log
 npm-debug.log
 log
+APNs.p8

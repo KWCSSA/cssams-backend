@@ -12,6 +12,7 @@ var Account = new Schema({
   fname: String,
   lname: String,
   idnum: Number,
+  deviceToken: String,
   passwordResetToken: String,
   passwordResetExpires: Date
 });
