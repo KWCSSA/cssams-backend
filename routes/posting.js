@@ -116,7 +116,7 @@ router.put('/:id', function(req, res, next) {
 	Posting.update({_id:req.params.id}, {
     content: req.body.content
   },function (err) {
-     if(err) return handleError(res, err);
+     if (err) return handleError(res, err);
      res.json({
        success:true
      });
@@ -175,7 +175,7 @@ router.delete('/:id/like', function(req, res, next) {
         res.json({
           success: true
         });
-      })
+      });
     }
   });
 });
@@ -217,7 +217,7 @@ router.delete('/:id/reply/:rid', function(req, res, next) {
     var rid = req.params.rid;
     var counter = rid;
     var notFound = false;
-    while(posting.replies[counter] == null || posting.replies[counter].rid > rid) {
+    while (posting.replies[counter] == null || posting.replies[counter].rid > rid) {
       counter--;
       if (counter == -1 || (posting.replies[counter] != null && posting.replies[counter].rid < rid)) {
         notFound = true;

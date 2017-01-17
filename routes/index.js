@@ -213,9 +213,8 @@ router.get('/profile', function(req, res, next) {
 });
 
 function isEmailOrUsername(req, res, next) {
-  if (req.body.email)
-      return next();
-  Account.findOne({username: req.body.username},function(err, user){
+  if (req.body.email) return next();
+  Account.findOne({username: req.body.username}, function(err, user){
     if (err) {
       console.log(err);
       return err;
