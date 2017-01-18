@@ -16,7 +16,6 @@ router.get('/', function(req, res, next) {
   skip(offset).
   limit(limit).
   populate('user', 'fname lname idnum').
-  populate('likes', 'idnum').
   populate('replies.user', 'fname lname idnum');
 
 

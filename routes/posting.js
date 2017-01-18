@@ -90,7 +90,6 @@ router.post('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   var query = Posting.findOne({_id:req.params.id}).
   populate('user', 'fname lname idnum').
-  populate('likes','idnum').
   populate('replies.user', 'fname lname idnum');
 
   query.exec(function(err, posting) {
