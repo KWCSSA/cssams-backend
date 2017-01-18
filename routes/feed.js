@@ -2,10 +2,11 @@ var express = require('express');
 var router = express.Router();
 var logger = require('../backend/services/logger.js');
 var Posting = require('../backend/models/posting.js');
+var getRandomName = require('../backend/services/randomnames.js');
 
-/* GET posting feed 
+/* GET posting feed
 Implementing the most basic kind of feed for now
-*/  
+*/
 
 router.get('/', function(req, res, next) {
   var offset = parseInt(req.query.offset);
@@ -15,11 +16,26 @@ router.get('/', function(req, res, next) {
   skip(offset).
   limit(limit).
   populate('user', 'fname lname idnum').
+  populate('likes', 'idnum').
   populate('replies.user', 'fname lname idnum');
-  
+
+
   query.exec(function(err, postings) {
-    if (err) logger.log('error', err);
-    res.json(postings);
+    if (err) {
+      logger.log('error', err);
+    } else {
+      postings.forEach(function(post) {
+        if (post.isAnon == true) {
+          post.user = null;
+          post.replies.forEach(function(reply) {
+            if (reply.isAnon == true) {
+              reply.user = null;
+            }
+          });
+        }
+      });
+      res.json(postings);
+    }
   });
 });
 

@@ -6,6 +6,7 @@ var logger = require('../backend/services/logger.js');
 var DBService = require('../backend/services/dbservice.js');
 var jwt = require('jsonwebtoken');
 var secret = require('../secret.js').jwtSecret;
+var getRandomName = require('../backend/services/randomnames.js');
 
 /* Middleware here to authenticate and identify user */
 router.use(function(req, res, next) {
@@ -49,6 +50,8 @@ router.get('/', function(req, res, next) {
     user: req.user._id
   }).
   select('content replies likes createdAt').
+  populate('likes','idnum').
+  populate('replies.user', 'anonName fname lname idnum').
   populate('replies.user', 'fname lname idnum').
   sort({createdAt: -1});
 
@@ -58,7 +61,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-/* POST posting. 
+/* POST posting.
 body: {
 	content: String,
 }
@@ -66,12 +69,17 @@ body: {
 router.post('/', function(req, res, next) {
   // Assume content is legal. Should do exception handling in the future.
   // Implement anonymous in the future.
+  var randName = getRandomName();
+  var display = req.body.isAnon ? randName : undefined;
   var posting = new Posting({
     user: req.user._id,
-    content: req.body.content
+    content: req.body.content,
+    isAnon: req.body.isAnon,
+    anonName: display
   });
   posting.save(function (err, posting) {
     if (err) return handleError(res, err);
+    console.log(posting);
     res.json({
       success: true
     });
@@ -80,17 +88,29 @@ router.post('/', function(req, res, next) {
 
 /* GET one posting. */
 router.get('/:id', function(req, res, next) {
-	var query = Posting.findOne({_id:req.params.id}).
+  var query = Posting.findOne({_id:req.params.id}).
   populate('user', 'fname lname idnum').
+  populate('likes','idnum').
   populate('replies.user', 'fname lname idnum');
 
   query.exec(function(err, posting) {
-    if(err) return handleError(res, err);
-    res.json(posting);
+    if (err) {
+      return handleError(res, err);
+    } else {
+      if (posting.isAnon == true) {
+        posting.user = null;
+        posting.replies.forEach(function(reply) {
+          if (reply.isAnon == true) {
+            reply.user = null;
+          }
+        });
+      }
+      res.json(posting);
+    }
   });
 });
 
-/* PUT one posting. 
+/* PUT one posting.
 body: {
 	content: String,
 }
@@ -100,7 +120,7 @@ router.put('/:id', function(req, res, next) {
 	Posting.update({_id:req.params.id}, {
     content: req.body.content
   },function (err) {
-     if(err) return handleError(res, err);
+     if (err) return handleError(res, err);
      res.json({
        success:true
      });
@@ -112,26 +132,25 @@ router.put('/:id', function(req, res, next) {
 /* DELETE one posting. */
 router.delete('/:id', function(req, res, next) {
 	Posting.remove({_id: req.params.id}, function(err) {
-    if(err) return handleError(res, err);
+    if (err) return handleError(res, err);
     res.json({
       success: true
     });
   });
 });
 
-/* POST a like. 
+/* POST a like.
 check whether the user has liked or not
 */
 router.post('/:id/like', function(req, res, next) {
 	Posting.findOne({_id:req.params.id}, function(err, posting) {
-    if(err) return handleError(res, err);
-    if(posting.likes.indexOf(req.user._id) != -1) {
+    if (err) return handleError(res, err);
+    if (posting.likes.indexOf(req.user._id) != -1) {
       res.status(400).send({
         success: false,
         msg: "ERROR User " + req.user.idnum + " has already liked this posting."
       });
-    }
-    else {
+    } else {
       posting.likes.push(req.user._id);
       posting.save(function(err, posting) {
         if(err) return handleError(res, err);
@@ -146,22 +165,21 @@ router.post('/:id/like', function(req, res, next) {
 /* DELETE a like. */
 router.delete('/:id/like', function(req, res, next) {
   Posting.findOne({_id:req.params.id}, function(err, posting) {
-    if(err) return handleError(res, err);
+    if (err) return handleError(res, err);
     var index = posting.likes.indexOf(req.user._id);
     if (index == -1) {
       res.status(400).send({
         success: false,
         msg: "ERROR User " + req.user.idnum + " has never ever liked this posting."
       });
-    }
-    else {
+    } else {
       posting.likes.splice(index, 1);
       posting.save(function(err, posting) {
         if(err) return handleError(res, err);
         res.json({
           success: true
         });
-      })
+      });
     }
   });
 });
@@ -174,14 +192,20 @@ router.post('/:id/reply', function(req, res, next) {
     //assign rid to the last reply's id + 1
     if (posting.replies.length == 0) rid = 0;
     else rid = posting.replies[posting.replies.length-1].rid + 1;
+
+    var randName = getRandomName();
+    var display = req.body.isAnon ? randName : undefined;
+
     var reply = {
       user: req.user._id,
       content: req.body.content,
+      isAnon: req.body.isAnon,
+      anonName: display,
       rid: rid
     }
     posting.replies.push(reply);
     posting.save(function(err, posting) {
-      if(err) return handleError(res, err);
+      if (err) return handleError(res, err);
       res.json({
         success: true
       });
@@ -197,7 +221,7 @@ router.delete('/:id/reply/:rid', function(req, res, next) {
     var rid = req.params.rid;
     var counter = rid;
     var notFound = false;
-    while(posting.replies[counter] == null || posting.replies[counter].rid > rid) {
+    while (posting.replies[counter] == null || posting.replies[counter].rid > rid) {
       counter--;
       if (counter == -1 || (posting.replies[counter] != null && posting.replies[counter].rid < rid)) {
         notFound = true;
@@ -218,8 +242,7 @@ router.delete('/:id/reply/:rid', function(req, res, next) {
           success: true
         });
       });
-    }
-    else {
+    } else {
       res.status(400).send({
         success: false,
         msg: "reply not found"
@@ -237,5 +260,3 @@ function handleError(res, err) {
 }
 
 module.exports = router;
-
-
