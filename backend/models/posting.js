@@ -9,6 +9,7 @@ var PostingSchema = new Schema({
   isAnon: { type: Boolean, default: false },
   anonName: String,
   createdAt: { type: Date, default: Date.now },
+  score: { type: Number, default: 0 },
   replies: [{
     rid: Number,
     content : String,

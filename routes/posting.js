@@ -75,7 +75,8 @@ router.post('/', function(req, res, next) {
     user: req.user._id,
     content: req.body.content,
     isAnon: req.body.isAnon,
-    anonName: display
+    anonName: display,
+    score: 168
   });
   posting.save(function (err, posting) {
     if (err) return handleError(res, err);
@@ -151,6 +152,7 @@ router.post('/:id/like', function(req, res, next) {
       });
     } else {
       posting.likes.push(req.user._id);
+      posting.score = posting.score + 30;
       posting.save(function(err, posting) {
         if(err) return handleError(res, err);
         res.json({
@@ -203,6 +205,7 @@ router.post('/:id/reply', function(req, res, next) {
       rid: rid
     }
     posting.replies.push(reply);
+    posting.score = posting.score + 50;
     posting.save(function(err, posting) {
       if (err) return handleError(res, err);
       res.json({
@@ -235,6 +238,7 @@ router.delete('/:id/reply/:rid', function(req, res, next) {
         });
       }
       posting.replies.splice(counter, 1);
+      posting.score = posting.score - 50;
       posting.save(function(err, posting) {
         if(err) return handleError(res, err);
         res.json({
