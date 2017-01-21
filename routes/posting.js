@@ -175,6 +175,7 @@ router.delete('/:id/like', function(req, res, next) {
       });
     } else {
       posting.likes.splice(index, 1);
+      posting.score = posting.score - 30;
       posting.save(function(err, posting) {
         if(err) return handleError(res, err);
         res.json({
