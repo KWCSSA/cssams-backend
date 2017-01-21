@@ -13,6 +13,7 @@ var posting = require('./routes/posting');
 var feed = require('./routes/feed');
 var jwt    = require('jsonwebtoken');
 var app = express();
+var job = require('./backend/services/scorereduce');
 
 var mongoose = require('mongoose');
 var passport = require('passport');
