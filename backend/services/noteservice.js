@@ -1,4 +1,4 @@
-var APNToken = require('./secret.js').APNtoken;
+var APNToken = require('../../secret.js').APNtoken;
 var apn = require('apn');
 var apnProvider = new apn.Provider(APNToken);
 var note = new apn.Notification();
