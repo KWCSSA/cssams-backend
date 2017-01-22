@@ -6,7 +6,7 @@ var logger = require('../backend/services/logger.js');
 var DBService = require('../backend/services/dbservice.js');
 var jwt = require('jsonwebtoken');
 var secret = require('../secret.js').jwtSecret;
-var noteservice = require('../backend/services');
+var noteservice = require('../backend/services/noteservice.js');
 var getRandomName = require('../backend/services/randomnames.js');
 
 /* Middleware here to authenticate and identify user */
