@@ -6,6 +6,7 @@ var logger = require('../backend/services/logger.js');
 var DBService = require('../backend/services/dbservice.js');
 var jwt = require('jsonwebtoken');
 var secret = require('../secret.js').jwtSecret;
+var noteservice = require('../backend/services');
 
 /* Middleware here to authenticate and identify user */
 router.use(function(req, res, next) {
@@ -135,6 +136,7 @@ router.post('/:id/like', function(req, res, next) {
       posting.likes.push(req.user._id);
       posting.save(function(err, posting) {
         if(err) return handleError(res, err);
+
         res.json({
           success: true
         });
@@ -182,6 +184,7 @@ router.post('/:id/reply', function(req, res, next) {
     posting.replies.push(reply);
     posting.save(function(err, posting) {
       if(err) return handleError(res, err);
+
       res.json({
         success: true
       });
