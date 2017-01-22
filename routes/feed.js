@@ -41,7 +41,9 @@ router.get('/latest', function(req, res, next) {
 router.get('/top', function(req, res, next) {
   var offset = parseInt(req.query.offset);
   var limit = parseInt(req.query.limit);
-  var query = Posting.find({}).
+  var query = Posting.find({
+    score: { $gt: 0 }
+  }).
   sort({score: -1}).
   skip(offset).
   limit(limit).
