@@ -6,6 +6,7 @@ var logger = require('../backend/services/logger.js');
 var DBService = require('../backend/services/dbservice.js');
 var jwt = require('jsonwebtoken');
 var secret = require('../secret.js').jwtSecret;
+var noteservice = require('../backend/services/noteservice.js');
 var getRandomName = require('../backend/services/randomnames.js');
 
 /* Middleware here to authenticate and identify user */
@@ -143,7 +144,7 @@ router.delete('/:id', function(req, res, next) {
 check whether the user has liked or not
 */
 router.post('/:id/like', function(req, res, next) {
-	Posting.findOne({_id:req.params.id}, function(err, posting) {
+	Posting.findOne({_id: req.params.id}, function(err, posting) {
     if (err) return handleError(res, err);
     if (posting.likes.indexOf(req.user._id) != -1) {
       res.status(400).send({
@@ -155,17 +156,18 @@ router.post('/:id/like', function(req, res, next) {
       posting.score = posting.score + 30;
       posting.save(function(err, posting) {
         if(err) return handleError(res, err);
+
         res.json({
           success: true
         });
-      })
+      });
     }
   });
 });
 
 /* DELETE a like. */
 router.delete('/:id/like', function(req, res, next) {
-  Posting.findOne({_id:req.params.id}, function(err, posting) {
+  Posting.findOne({_id: req.params.id}, function(err, posting) {
     if (err) return handleError(res, err);
     var index = posting.likes.indexOf(req.user._id);
     if (index == -1) {
@@ -188,7 +190,7 @@ router.delete('/:id/like', function(req, res, next) {
 
 /* POST a reply. */
 router.post('/:id/reply', function(req, res, next) {
-	Posting.findOne({_id:req.params.id}, function(err, posting) {
+	Posting.findOne({_id: req.params.id}, function(err, posting) {
     if (err) return handleError(res, err);
     var rid;
     //assign rid to the last reply's id + 1
@@ -209,6 +211,13 @@ router.post('/:id/reply', function(req, res, next) {
     posting.score = posting.score + 50;
     posting.save(function(err, posting) {
       if (err) return handleError(res, err);
+
+      Account.findOne({_id: posting.user}, function(err, user) {
+        if (user.deviceToken && req.user._id.toString() != posting.user.toString()) {
+          noteservice.sendCommentNote(user.deviceToken, posting._id, req.body.content);
+        }
+      });
+      
       res.json({
         success: true
       });
@@ -218,7 +227,7 @@ router.post('/:id/reply', function(req, res, next) {
 
 /* DELETE a reply. */
 router.delete('/:id/reply/:rid', function(req, res, next) {
-	Posting.findOne({_id:req.params.id}, function(err, posting) {
+	Posting.findOne({_id: req.params.id}, function(err, posting) {
     if (err) return handleError(res, err);
     // This can be optimized to O(log(n)), maybe after taking CS240
     var rid = req.params.rid;
