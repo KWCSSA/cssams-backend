@@ -213,6 +213,8 @@ router.post('/:id/reply', function(req, res, next) {
       if (err) return handleError(res, err);
 
       Account.findOne({_id: posting.user}, function(err, user) {
+        console.log(req.user._id);
+        console.log(posting.user);
         if (user.deviceToken && req.user._id != posting.user) {
           noteservice.sendCommentNote(user.deviceToken, posting._id, req.body.content);
         }
