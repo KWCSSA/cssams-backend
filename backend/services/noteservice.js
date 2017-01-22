@@ -18,7 +18,6 @@ var noteservice = {
     };
     note.topic = "com.diantang.cssams";
     apnProvider.send(note, dToken).then((result) => {
-      // see documentation for an explanation of result
       logger.log("info", result);
     });
 	}
