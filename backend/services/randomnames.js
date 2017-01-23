@@ -87,9 +87,9 @@ var getRandomName = function() {
   var adj = left[adjIndex];
   var surname = right[surnameIndex];
 
-  var rand = Math.floor(Math.random() * 10) + 1;
+  // var rand = Math.floor(Math.random() * 10) + 1;
 
-  var fullname = adj + '的' + surname + rand;
+  var fullname = adj + '的' + surname;
 
   return fullname;
 };
