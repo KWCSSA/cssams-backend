@@ -21,7 +21,7 @@ var leftEng = ["admiring","adoring","affectionate","agitated","amazing",
 
 var left = ["大方", "年轻", "聪明", "雪白", "漂亮", "笔直", "时尚", "平等",
 						"优秀", "慌张", "俗气", "马虎", "博学", "主观", "明快", "高兴",
-						"幸福", "清楚", "明确", "结实", "具体", "伟大" , "勇敢" , "坚强" ,
+						"幸福", "清楚", "明确", "结实", "具体", "伟大", "勇敢", "坚强",
 						"温柔", "平淡", "简单", "固执", "醒目", "干净", "傲慢", "倔强",
 						"脆弱", "乐观", "爽朗", "豪放", "开朗", "爱笑", "娇柔", "友好",
 						"活泼", "昂贵", "孤独", "好动", "愉快", "热情", "可亲", "健谈",
@@ -30,7 +30,7 @@ var left = ["大方", "年轻", "聪明", "雪白", "漂亮", "笔直", "时尚"
 						"老实", "沉著", "和平", "体贴", "忠诚", "知足", "果断", "首领",
 						"喜爱", "善变", "细节", "保守", "忠心", "费解", "自信", "独立",
 						"不凡", "悠然", "从容", "迷人", "淡定", "海涵", "洋气", "高雅",
-						"风度", "随和", "王者", "潇洒", "宽容", "迷茫", "困惑" , "乏困",
+						"风度", "随和", "王者", "潇洒", "宽容", "迷茫", "困惑", "乏困",
 						"疲倦"
 ];
 
@@ -81,8 +81,8 @@ var right = ["泡泡糖", "肉包子", "饺子", "粽子", "桃子", "苹果", "
 ];
 
 var getRandomName = function() {
-  var adjIndex = Math.floor(Math.random() * left.length) + 1;
-  var surnameIndex = Math.floor(Math.random() * right.length) + 1;
+  var adjIndex = Math.floor(Math.random() * left.length);
+  var surnameIndex = Math.floor(Math.random() * right.length);
 
   var adj = left[adjIndex];
   var surname = right[surnameIndex];
