@@ -9,6 +9,12 @@ var Account = new Schema({
     type: String,
     unique: true
   },
+  isEmailVerified: {
+    type: Boolean,
+    default: false
+  },
+  emailVerificationToken: String,
+  emailVerificationExpires: Date,
   fname: String,
   lname: String,
   idnum: Number,

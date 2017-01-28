@@ -63,7 +63,6 @@ router.post('/login', isEmailOrUsername, passport.authenticate('local', {
   var token = jwt.sign(req.user, secret, {
     expiresIn: '365d' // expires in 365 days
   });
-
   req.user.deviceToken = req.body.dToken;
   req.user.save(function (err, user) {
       if (err) return handleError(res, err);
@@ -157,6 +156,102 @@ router.get('/reset/:token', function(req, res, next) {
     }
   });
 });
+
+router.post('/verifyemail', function(req, res, next) {
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(16, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      Account.findOne({
+        email: req.body.email
+      }, function(err, user) {
+        if (!user) {
+          return res.status(400).send({
+            msg: 'The email address ' + req.body.email + ' is not associated with any account.'
+          });
+        }
+        if(user.isEmailVerified) {
+          done(undefined, undefined, user);
+        } else {
+          user.emailVerificationToken = token;
+          user.emailVerificationExpires = Date.now() + 18000000; // expire in 5 hour
+          user.save(function(err) {
+            done(err, token, user);
+          });
+        }
+      });
+    },
+    function(token, user, done) {
+      res.json({
+        success: true
+      });
+
+      if(typeof token != 'undefined') {
+        mailService.sendEmailVerificationEmail({
+          email: user.email,
+          username: user.username,
+          verificationToken: token,
+          host: req.headers.host
+        });
+      } else {
+        mailService.sendEmailVerificationAlreadyDoneEmail({
+          email: user.email,
+          username: user.username,
+          host: req.headers.host
+        });
+      }
+      done();
+    }
+  ]);
+});
+
+router.post('/verify/:token', function(req, res, next) {
+  console.log(req.params.token)
+  Account.findOne({
+      emailVerificationToken: req.params.token
+    })
+    .where('emailVerificationExpires').gt(Date.now())
+    .exec(function(err, user) {
+      if (!user) {
+        return res.status(400).send({
+          msg: 'Email verification token is invalid or has expired.'
+        });
+      }
+
+      user.emailVerificationToken = undefined;
+      user.emailVerificationExpires = undefined;
+      user.isEmailVerified = true;
+
+      user.save(function(err) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.render('email verified succesfully');
+          mailService.sendEmailVerificationSuccessfulEmail({
+            email: user.email
+          });
+        }
+      });
+
+    });
+});
+/*
+router.get('/verify/:token', function(req, res, next) {
+  Account.findOne({
+    emailVerificationToken: req.params.token
+  }, function(err, user) {
+    if (!user) res.render('badToken');
+    else {
+      res.render('verified', {
+        user: user
+      });
+    }
+  });
+});*/
 
 router.get('/bosses', function(req, res, next) {
   res.json(bosses);
