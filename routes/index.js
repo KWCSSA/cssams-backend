@@ -209,54 +209,37 @@ router.post('/verifyemail', function(req, res, next) {
   ]);
 });
 
-router.post('/verify/:token', function(req, res, next) {
-  console.log(req.params.token)
+router.get('/verify/:token', function(req, res, next) {
   Account.findOne({
       emailVerificationToken: req.params.token
     })
     .where('emailVerificationExpires').gt(Date.now())
     .exec(function(err, user) {
       if (!user) {
-        return res.status(400).send({
-          msg: 'Email verification token is invalid or has expired.'
+        res.render('badToken');
+      } else {
+
+        user.emailVerificationToken = undefined;
+        user.emailVerificationExpires = undefined;
+        user.isEmailVerified = true;
+
+        user.save(function(err) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.render('verified');
+            mailService.sendEmailVerificationSuccessfulEmail({
+              email: user.email
+            });
+          }
         });
       }
-
-      user.emailVerificationToken = undefined;
-      user.emailVerificationExpires = undefined;
-      user.isEmailVerified = true;
-
-      user.save(function(err) {
-        if (err) {
-          console.log(err);
-        } else {
-          res.render('email verified succesfully');
-          mailService.sendEmailVerificationSuccessfulEmail({
-            email: user.email
-          });
-        }
-      });
-
     });
-});
-
-router.get('/verify/:token', function(req, res, next) {
-  Account.findOne({
-    emailVerificationToken: req.params.token
-  }, function(err, user) {
-    if (!user) res.render('badToken');
-    else {
-      res.render('verified', {
-        user: user
-      });
-    }
-  });
 });
 
 router.get('/bosses', function(req, res, next) {
   res.json(bosses);
 });
-
 
 
 router.use(function(req, res, next) {
