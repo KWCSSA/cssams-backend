@@ -239,7 +239,7 @@ router.post('/verify/:token', function(req, res, next) {
 
     });
 });
-/*
+
 router.get('/verify/:token', function(req, res, next) {
   Account.findOne({
     emailVerificationToken: req.params.token
@@ -251,7 +251,7 @@ router.get('/verify/:token', function(req, res, next) {
       });
     }
   });
-});*/
+});
 
 router.get('/bosses', function(req, res, next) {
   res.json(bosses);
