@@ -70,7 +70,7 @@ body: {
 router.post('/', function(req, res, next) {
   // Assume content is legal. Should do exception handling in the future.
   if (!req.user.isEmailVerified) {
-    return res.status(400).send({
+    return res.json({
       success: false,
       msg: '需要验证邮箱才能贴条。在\"我\"页面可以找到发送验证邮件按钮。'
     });
@@ -196,7 +196,7 @@ router.delete('/:id/like', function(req, res, next) {
 /* POST a reply. */
 router.post('/:id/reply', function(req, res, next) {
   if (!req.user.isEmailVerified) {
-    return res.status(400).send({
+    return res.json({
       success: false,
       msg: '需要验证邮箱才能发评论。在\"我\"页面可以找到发送验证邮件按钮。'
     });
