@@ -77,6 +77,72 @@ var mailService = {
       }
       console.log('Message sent: ' + info.response);
     });
+  },
+
+  sendEmailVerificationEmail: function(user) {
+
+    var subject = 'Action required: Please verify your email address';
+    var text = 'Hello, \n\n' +
+      'This is a verification email. Please click the following link to verify your email address. \n\n' +
+      'http://' + user.host + '/verify/' + user.verificationToken + '\n\n' +
+      'Thank you very much.';
+
+    var mailOptions = {
+      from: '"KWCSSA IT department" <it@uwcssa.com>', // sender address
+      to: user.email, // list of receivers
+      subject: subject,
+      html: text
+    };
+
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Message sent: ' + info.response);
+    });
+  },
+
+  sendEmailVerificationAlreadyDoneEmail: function(user) {
+
+    var subject = 'Your email has already been verified';
+    var text = 'Hello, \n\n' +
+      'Your email has already been verified. No action is required.';
+
+    var mailOptions = {
+      from: '"KWCSSA IT department" <it@uwcssa.com>', // sender address
+      to: user.email, // list of receivers
+      subject: subject,
+      html: text
+    };
+
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Message sent: ' + info.response);
+    });
+  },
+
+
+  sendEmailVerificationSuccessfulEmail: function(user) {
+
+    var subject = 'Your email has been verified';
+    var text = 'Hello, \n\n' +
+      'Your email has been verified successfully. No further action is required.';
+
+    var mailOptions = {
+      from: '"KWCSSA IT department" <it@uwcssa.com>', // sender address
+      to: user.email, // list of receivers
+      subject: subject,
+      html: text
+    };
+
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Message sent: ' + info.response);
+    });
   }
 
 
