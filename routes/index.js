@@ -191,6 +191,9 @@ router.post('/verifyemail', function(req, res, next) {
       });
 
       if(typeof token != 'undefined') {
+        res.json({
+          success: true
+        });
         mailService.sendEmailVerificationEmail({
           email: user.email,
           username: user.username,
