@@ -128,7 +128,7 @@ var mailService = {
 
     var subject = 'Your email has been verified';
     var text = 'Hello, \n\n' +
-      'Your email has been verified successfully. No furthur action is required.';
+      'Your email has been verified successfully. No further action is required.';
 
     var mailOptions = {
       from: '"KWCSSA IT department" <it@uwcssa.com>', // sender address
