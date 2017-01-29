@@ -198,7 +198,7 @@ router.post('/:id/reply', function(req, res, next) {
   if (!req.user.isEmailVerified) {
     return res.status(400).send({
       success: false,
-      msg: '需要验证邮箱才能发评论。在\"我\"页面可以找到发送验证邮件按钮。''
+      msg: '需要验证邮箱才能发评论。在\"我\"页面可以找到发送验证邮件按钮。'
     });
   }
 	Posting.findOne({_id: req.params.id}, function(err, posting) {
