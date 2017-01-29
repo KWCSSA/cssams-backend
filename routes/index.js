@@ -45,7 +45,7 @@ router.post('/register', function(req, res, next) {
         res.json({
           success: true
         });
-        console.log('info','user registered!');
+        logger.log('info','user registered!');
         mailService.sendWelcomeEmail({
           firstName: req.body.fname,
           email: req.body.email
