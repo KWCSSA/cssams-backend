@@ -50,7 +50,6 @@ router.get('/', function(req, res, next) {
   var query = Posting.find({
     user: req.user._id
   }).
-  select('content replies likes createdAt').
   populate('user', 'fname lname idnum').
   populate('replies.user', 'fname lname idnum');
   sort({createdAt: -1});

@@ -278,7 +278,6 @@ router.use(function(req, res, next) {
 
 router.get('/cardimage', function(req, res, next) {
   var user = req.user;
-  logger.log('info', user.idnum + " getting Image!");
   CardCreater.createCard(user.fname, user.lname, user.idnum, function(err, data) {
     if (err) console.log(err);
     else {
