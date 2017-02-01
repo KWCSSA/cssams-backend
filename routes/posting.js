@@ -72,6 +72,7 @@ router.get('/', function(req, res, next) {
     // }
   }
 });
+});
 
 /* POST posting.
 body: {
