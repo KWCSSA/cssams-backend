@@ -51,27 +51,27 @@ router.get('/', function(req, res, next) {
     user: req.user._id
   }).
   populate('user', 'fname lname idnum').
-  populate('replies.user', 'fname lname idnum');
+  populate('replies.user', 'fname lname idnum').
   sort({createdAt: -1});
 
   query.exec(function(err, postings) {
     if (err) {
       logger.log('error', err);
     } else {
-      // postings.forEach(function(post) {
-      //   if (post.isAnon == true) {
-      //     post.user = null;
-      //     post.replies.forEach(function(reply) {
-      //       if (reply.isAnon == true) {
-      //         reply.user = null;
-      //       }
-      //     });
-      //   }
-      // });
+      postings.forEach(function(post) {
+        if (post.isAnon == true) {
+          post.user = null;
+          post.replies.forEach(function(reply) {
+            if (reply.isAnon == true) {
+              reply.user = null;
+            }
+          });
+        }
+      });
       res.json(postings);
-    // }
+    }
   }
-});
+);
 });
 
 /* POST posting.
