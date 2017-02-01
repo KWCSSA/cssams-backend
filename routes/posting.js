@@ -70,7 +70,7 @@ router.get('/', function(req, res, next) {
       // });
       res.json(postings);
     // }
-  });
+  }
 });
 
 /* POST posting.
