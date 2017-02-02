@@ -84,7 +84,7 @@ router.post('/', function(req, res, next) {
   if (!req.user.isEmailVerified) {
     return res.json({
       success: false,
-      msg: '需要验证邮箱才能贴条。在\"我\"页面可以找到发送验证邮件按钮。'
+      msg: '需要验证邮箱才能贴条。在\"会员卡\"页面右上角可以找到发送验证邮件按钮。'
     });
   }
   var randName = getRandomName();
@@ -210,7 +210,7 @@ router.post('/:id/reply', function(req, res, next) {
   if (!req.user.isEmailVerified) {
     return res.json({
       success: false,
-      msg: '需要验证邮箱才能发评论。在\"我\"页面可以找到发送验证邮件按钮。'
+      msg: '需要验证邮箱才能发评论。在\"会员卡\"页面右上角可以找到发送验证邮件按钮。'
     });
   }
 	Posting.findOne({_id: req.params.id}, function(err, posting) {
