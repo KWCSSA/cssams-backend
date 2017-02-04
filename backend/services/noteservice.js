@@ -21,7 +21,7 @@ var noteservice = {
     note.topic = "com.diantang.cssams";
     apnProvider.send(note, dToken).then((result) => {
       logger.log("info", result);
-      if (result.failed) {
+      if (result.failed.length != 0) {
         apnProvider = new apn.Provider(APNToken);
         apnProvider.send(note, dToken).then((result) => {
           logger.log("info", result);
