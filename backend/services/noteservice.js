@@ -21,6 +21,12 @@ var noteservice = {
     note.topic = "com.diantang.cssams";
     apnProvider.send(note, dToken).then((result) => {
       logger.log("info", result);
+      if (result.failed) {
+        apnProvider = new apn.Provider(APNToken);
+        apnProvider.send(note, dToken).then((result) => {
+          logger.log("info", result);
+        }
+      }
     });
 	},
 
@@ -46,7 +52,6 @@ var noteservice = {
     });
   }
 }
-
 
 
 module.exports = noteservice;
