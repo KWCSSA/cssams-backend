@@ -25,7 +25,7 @@ var noteservice = {
         apnProvider = new apn.Provider(APNToken);
         apnProvider.send(note, dToken).then((result) => {
           logger.log("info", result);
-        }
+        });
       }
     });
 	},
