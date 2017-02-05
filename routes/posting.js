@@ -94,7 +94,7 @@ router.post('/', function(req, res, next) {
   //     msg: 'Sorry，不能超过300个字符。'
   //   });
   // }
-  var lines = req.body.content.split("\r\n|\r|\n");
+  var lines = req.body.content.split("\n");
   if (lines.length >= 10) {
     return res.json({
       success: false,
