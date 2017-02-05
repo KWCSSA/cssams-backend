@@ -87,6 +87,19 @@ router.post('/', function(req, res, next) {
       msg: '需要验证邮箱才能贴条。在\"会员卡\"页面右上角可以找到发送验证邮件按钮。'
     });
   }
+  if (req.body.content.length() > 300) {
+    return res.json({
+      success: false,
+      msg: 'Sorry，不能超过300个字符。'
+    });
+  }
+  var lines = req.body.content.split("\r\n|\r|\n");
+  if (lines.length >= 10) {
+    return res.json({
+      success: false,
+      msg: 'Sorry，内容不能超过10行。'
+    });
+  }
   var randName = getRandomName();
   var display = req.body.isAnon ? randName : undefined;
   var posting = new Posting({
