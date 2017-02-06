@@ -42,14 +42,12 @@ router.post('/register', function(req, res, next) {
         });
         //return next(err);
       } else {
-        res.json({
-          success: true
-        });
         logger.log('info','user registered!');
         mailService.sendWelcomeEmail({
           firstName: req.body.fname,
           email: req.body.email
         });
+        sendVerificationEmail(req.body.email, req.headers.host, res);
       }
     });
   });
@@ -158,55 +156,7 @@ router.get('/reset/:token', function(req, res, next) {
 });
 
 router.post('/verifyemail', function(req, res, next) {
-  async.waterfall([
-    function(done) {
-      crypto.randomBytes(16, function(err, buf) {
-        var token = buf.toString('hex');
-        done(err, token);
-      });
-    },
-    function(token, done) {
-      Account.findOne({
-        email: req.body.email
-      }, function(err, user) {
-        if (!user) {
-          return res.status(400).send({
-            msg: 'The email address ' + req.body.email + ' is not associated with any account.'
-          });
-        }
-        if(user.isEmailVerified) {
-          done(undefined, undefined, user);
-        } else {
-          user.emailVerificationToken = token;
-          user.emailVerificationExpires = Date.now() + 18000000; // expire in 5 hour
-          user.save(function(err) {
-            done(err, token, user);
-          });
-        }
-      });
-    },
-    function(token, user, done) {
-      res.json({
-        success: true
-      });
-
-      if(typeof token != 'undefined') {
-        mailService.sendEmailVerificationEmail({
-          email: user.email,
-          username: user.username,
-          verificationToken: token,
-          host: req.headers.host
-        });
-      } else {
-        mailService.sendEmailVerificationAlreadyDoneEmail({
-          email: user.email,
-          username: user.username,
-          host: req.headers.host
-        });
-      }
-      done();
-    }
-  ]);
+  sendVerificationEmail(req.body.email, req.headers.host, res);
 });
 
 router.get('/verify/:token', function(req, res, next) {
@@ -311,6 +261,57 @@ function isEmailOrUsername(req, res, next) {
     req.body.email = user.email;
     return next();
   });
+}
+
+function sendVerificationEmail(email, host, res){
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(16, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      Account.findOne({
+        email: email
+      }, function(err, user) {
+        if (!user) {
+          return res.status(400).send({
+            msg: 'The email address ' + email + ' is not associated with any account.'
+          });
+        }
+        if(user.isEmailVerified) {
+          done(undefined, undefined, user);
+        } else {
+          user.emailVerificationToken = token;
+          user.emailVerificationExpires = Date.now() + 18000000; // expire in 5 hour
+          user.save(function(err) {
+            done(err, token, user);
+          });
+        }
+      });
+    },
+    function(token, user, done) {
+      res.json({
+        success: true
+      });
+      if(typeof token != 'undefined') {
+        mailService.sendEmailVerificationEmail({
+          email: user.email,
+          username: user.username,
+          verificationToken: token,
+          host: host
+        });
+      } else {
+        mailService.sendEmailVerificationAlreadyDoneEmail({
+          email: user.email,
+          username: user.username,
+          host: host
+        });
+      }
+      done();
+    }
+  ]);
 }
 
 function handleError(res, err) {
