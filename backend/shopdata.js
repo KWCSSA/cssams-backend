@@ -13,7 +13,7 @@ var bosses = {
       id: "chatime",
       address: "255 King St N #9, Waterloo",
       phone: "519-208-5580",
-      description: "所有饮料 One Free Topping",
+      description: "All Beverages One Free Topping",
       imageUrl: "http://ituwcssa.com:5500/logos/chatime.png",
       time: "Mon-Sun: 11:30AM - 12:00AM"
     }, {
@@ -28,12 +28,12 @@ var bosses = {
       phone: "519-886-2929",
       imageUrl: "http://ituwcssa.com:5500/logos/bogda.png"
     }, {
-      title: "马队长拉面",
+      title: "马队长拉面 Noodles One",
       id: "ma",
       address: "220 King Street North, Waterloo",
       imageUrl: "http://ituwcssa.com:5500/logos/ma.png",
       time: "Mon-Sun: 10:00 am – 11:30 pm",
-      description: "现金 10% off",
+      description: "Cash 10% off",
       phone: "519-957-9665"
 
     }, {
@@ -41,7 +41,7 @@ var bosses = {
       id: "foodie",
       address: "203 Lester St., Unit 7, Waterloo",
       phone: "519-880-8688",
-      description: "Cash 10% Off (特价商品，代卖品牌和酒精饮料除外）",
+      description: "Cash 10% Off (Excluding specials, alcohol and ）",
       imageUrl: "http://ituwcssa.com:5500/logos/foodie.png",
       time: "Sun - Thurs: 11:30am - 11:30pm \
 			Fri, Sat: 11:30am - 12:00am ",
@@ -50,7 +50,7 @@ var bosses = {
       id: "empire",
       address: "160 University Ave W, Waterloo",
       phone: " 519-588-7777",
-      description: "现金 10% Off",
+      description: "Cash 10% Off",
       imageUrl: "http://ituwcssa.com:5500/logos/empire.png",
       time: "Mon-Sun 10:00AM - 10:00PM"
     }, {
@@ -58,7 +58,7 @@ var bosses = {
       id: "lianhua",
       address: "150 University Ave W, Waterloo",
       phone: "519-580-6666",
-      description: "现金 10% Off",
+      description: "Cash 10% Off",
       imageUrl: "http://ituwcssa.com:5500/logos/lianhua.png",
       time: "Mon-Fri: 11:00 am – 10:00 pm\
 			Sat-Sun: 12:00 pm – 10:00 pm"
@@ -68,18 +68,20 @@ var bosses = {
       address: "170 University Ave W, Waterloo",
       phone: "519-208-2188",
       imageUrl: "http://ituwcssa.com:5500/logos/sogo.png",
-      description: "现金 10% Off",
+      description: "Cash 10% Off",
       time: "Mon-Sun: 10:00am-10:00pm"
-    }, {
-      title: "三十味",
-      id: "sanshi",
-      address: "465 Phillip St, Waterloo",
-      phone: "519-580-6666",
-      description: "10% Off",
-      imageUrl: "http://ituwcssa.com:5500/logos/sanshi.png",
-      time: "Mon-Fri: 11:00 am – 10:00 pm\
-			Sat-Sun: 12:00 pm – 10:00 pm"
-    }, {
+    }, 
+   //  {
+   //    title: "三十味",
+   //    id: "sanshi",
+   //    address: "465 Phillip St, Waterloo",
+   //    phone: "519-580-6666",
+   //    description: "10% Off",
+   //    imageUrl: "http://ituwcssa.com:5500/logos/sanshi.png",
+   //    time: "Mon-Fri: 11:00 am – 10:00 pm\
+			// Sat-Sun: 12:00 pm – 10:00 pm"
+   //  }, 
+    {
       title: "Ms. Salty Cake Boutique",
       id: "salty",
       address: "商业注册烘焙工作室，不设店面",
@@ -101,7 +103,7 @@ var bosses = {
       id: "tangji",
       address: "203 Lester Street Unit 5, Waterloo",
       phone: "226-647-3382",
-      description: "糖记积分卡双倍积分",
+      description: "Sugar Marmalade point card double points",
       imageUrl: "http://ituwcssa.com:5500/logos/tangji.png",
       time: "12:00 pm – 1:00 am"
 
@@ -128,16 +130,18 @@ var bosses = {
 			周六 12pm~9pm\
 			周日 4pm~8pm"
 
-    }, {
-      title: "宋师傅兰州拉面",
-      id: "song",
-      address: "D-220 King st N. Waterloo",
-      phone: "519-884-1188",
-      description: "现金 15% Off",
-      imageUrl: "http://ituwcssa.com:5500/logos/song.png",
-      time: ""
+    }, 
+    // {
+    //   title: "宋师傅兰州拉面",
+    //   id: "song",
+    //   address: "D-220 King st N. Waterloo",
+    //   phone: "519-884-1188",
+    //   description: "现金 15% Off",
+    //   imageUrl: "http://ituwcssa.com:5500/logos/song.png",
+    //   time: ""
 
-    }, {
+    // },
+     {
       title: "食德喜小馆 (China Garden) ",
       id: "shidexi",
       address: "31 University Ave E, Waterloo",
@@ -156,7 +160,7 @@ var bosses = {
       time: ""
 
     }, {
-      title: "恩康饺子馆",
+      title: "恩康饺子馆 （Grace and Healthy Dumplings)",
       id: "enkang",
       address: "5B-150 University Avenue West, Waterloo",
       time: "11AM - 1AM, Sunday: 12PM-1AM",
@@ -164,11 +168,11 @@ var bosses = {
       phone: "519-208-0061",
       imageUrl: "http://ituwcssa.com:5500/logos/enkang.png"
     }, {
-      title: "石头剪刀铺",
+      title: "石头剪刀铺 Rock Paper Scissors",
       id: "rsp",
       address: "Unit A, 181 Lester Street, Waterloo",
       time: "",
-      description: "第二次石头剪刀布机会",
+      description: "Second Chance of Rock Paper Scissors",
       phone: "",
       imageUrl: "http://ituwcssa.com:5500/logos/rsp.png"
     }, {
@@ -180,7 +184,7 @@ var bosses = {
       phone: "",
       imageUrl: "http://ituwcssa.com:5500/logos/rollingpepper.png"
     }, {
-      title: "品味居",
+      title: "品味居 China Bowl",
       id: "pinweiju",
       address: "258 King St N, Waterloo",
       time: "",
@@ -258,7 +262,7 @@ var bosses = {
     imageUrl: "http://ituwcssa.com:5500/logos/shuicheng.png",
   }],
   "Entertainment": [{
-      title: "先锋旅游",
+      title: "先锋旅游 New Pioneers Travel",
       id: "pioneer",
       address: "",
       phone: "Wechat: newpioneertravel",
@@ -300,7 +304,7 @@ var bosses = {
 			Sunday 12pm-5pm",
     imageUrl: "http://ituwcssa.com:5500/logos/huancai.png",
   }, {
-    title: "EE汽车美容",
+    title: "EE汽车美容 (EE Car Services)",
     id: "ee",
     address: "165 bathurst Dr Unit#5 N2V 1Z4, Waterloo",
     phone: "519-888-8255",
