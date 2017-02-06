@@ -125,10 +125,10 @@ var bosses = {
       phone: "519-578-9189",
       description: "10% off",
       imageUrl: "http://ituwcssa.com:5500/logos/metro.png",
-      time: "周一  11am~8pm\
-			周二至周五 11am~9pm\
-			周六 12pm~9pm\
-			周日 4pm~8pm"
+      time: "Monday  11am~8pm\
+			Tuesday to Friday 11am~9pm\
+			Saturday 12pm~9pm\
+			Sunday 4pm~8pm"
 
     }, 
     // {
@@ -231,7 +231,7 @@ var bosses = {
     id: "chatime",
     address: "255 King St N #9, Waterloo",
     phone: "519-208-5580",
-    description: "所有饮料 One Free Topping",
+    description: "All Beverages One Free Topping",
     imageUrl: "http://ituwcssa.com:5500/logos/chatime.png",
     time: "Mon-Sun: 11:30AM - 12:00AM"
   }, ],
@@ -240,7 +240,7 @@ var bosses = {
     id: "mcphail",
     address: "98 King St. N, Waterloo",
     phone: "519-886-4340",
-    description: "配件和冰球器材八五折，买原价新车赠送70元头盔或60元锁",
+    description: "Accessories and hockey equipments 15% off; Free $70 helmet or $60 lock when purchasing new bike(original price)",
     time: "",
     imageUrl: "http://ituwcssa.com:5500/logos/mcphail.png",
   }, {
@@ -308,7 +308,7 @@ var bosses = {
     id: "ee",
     address: "165 bathurst Dr Unit#5 N2V 1Z4, Waterloo",
     phone: "519-888-8255",
-    description: "洗车消费100以上减5刀，两人以上来店镀晶送挡风玻璃镀晶",
+    description: "Spending $100+ on car wash, get $5 off. 两人以上来店镀晶送挡风玻璃镀晶",
     time: "11：30-20:00, TUE closed",
     imageUrl: "http://ituwcssa.com:5500/logos/ee.png",
   }, {
