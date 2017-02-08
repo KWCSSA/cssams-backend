@@ -11,7 +11,6 @@ var noteservice = {
 	sendCommentNote: function(dToken, postingId, comment) {
     var note = new apn.Notification();
     note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
-    note.badge = 3;
     note.sound = "ping.aiff";
     note.alert = "\u2709 You have a new comment! \"" + comment + "\"";
     note.payload = {
