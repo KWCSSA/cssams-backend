@@ -81,20 +81,6 @@ body: {
 */
 router.post('/', function(req, res, next) {
   // Assume content is legal. Should do exception handling in the future.
-<<<<<<< HEAD
-  if (!req.user.isEmailVerified) {
-    return res.json({
-      success: false,
-      msg: '需要验证邮箱才能贴条。在\"会员卡\"页面右上角可以找到发送验证邮件按钮。'
-    });
-  }
-  // var contentString = req.body.content.toString();
-  // if (contentString.length() > 300) {
-  //   return res.json({
-  //     success: false,
-  //     msg: 'Sorry，不能超过300个字符。'
-  //   });
-  // }
   var lines = req.body.content.split("\n");
   if (lines.length >= 10) {
     return res.json({
@@ -102,14 +88,12 @@ router.post('/', function(req, res, next) {
       msg: 'Sorry，内容不能超过10行。'
     });
   }
-=======
   // if (!req.user.isEmailVerified) {
   //   return res.json({
   //     success: false,
   //     msg: '需要验证邮箱才能贴条。在\"会员卡\"页面右上角可以找到发送验证邮件按钮。'
   //   });
   // }
->>>>>>> push
   var randName = getRandomName();
   var display = req.body.isAnon ? randName : undefined;
   var posting = new Posting({
