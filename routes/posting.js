@@ -188,6 +188,13 @@ router.post('/:id/like', function(req, res, next) {
       posting.save(function(err, posting) {
         if(err) return handleError(res, err);
 
+        Account.findOne({_id: posting.user}, function(err, user) {
+          if (user.deviceToken && req.user._id.toString() != posting.user.toString()) {
+            noteservice.sendLikeNote(user.deviceToken, posting._id);
+            noteservice.sendLikeNoteAndroid(user.deviceToken, posting._id);
+          }
+        });
+
         res.json({
           success: true
         });
