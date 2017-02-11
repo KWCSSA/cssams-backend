@@ -47,7 +47,7 @@ var mailService = {
 
     var mailOptions = {
       from: '"KWCSSA IT department" <it@uwcssa.com>', // sender address
-      to: user.email, // list of receivers
+      to: user.email.toLowerCase(), // list of receivers
       subject: subject,
       html: text
     };
@@ -67,7 +67,7 @@ var mailService = {
 
     var mailOptions = {
       from: '"KWCSSA IT department" <it@uwcssa.com>', // sender address
-      to: user.email, // list of receivers
+      to: user.email.toLowerCase(), // list of receivers
       subject: subject,
       html: text
     };
@@ -89,7 +89,7 @@ var mailService = {
 
     var mailOptions = {
       from: '"KWCSSA IT department" <it@uwcssa.com>', // sender address
-      to: user.email, // list of receivers
+      to: user.email.toLowerCase(), // list of receivers
       subject: subject,
       html: text
     };
@@ -110,7 +110,7 @@ var mailService = {
 
     var mailOptions = {
       from: '"KWCSSA IT department" <it@uwcssa.com>', // sender address
-      to: user.email, // list of receivers
+      to: user.email.toLowerCase(), // list of receivers
       subject: subject,
       html: text
     };
@@ -132,7 +132,7 @@ var mailService = {
 
     var mailOptions = {
       from: '"KWCSSA IT department" <it@uwcssa.com>', // sender address
-      to: user.email, // list of receivers
+      to: user.email.toLowerCase(), // list of receivers
       subject: subject,
       html: text
     };
