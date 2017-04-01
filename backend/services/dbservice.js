@@ -26,6 +26,16 @@ var DBService = {
       }
     });
   },
+
+  getNotifiableUsers: function(cb) {
+    Account.find({
+      deviceToken: {$exists:true}
+    }, function(err, users) {
+      if (err) {
+        logger.log('error', err);
+        cb(err, null);
+      } else cb(null, users);
+    }
 };
 
 module.exports = DBService;
