@@ -8,11 +8,11 @@ mongoose.connect('mongodb://localhost/cssams');
 DBService.getNotifiableUsers(function(err, users) {
   console.log(users.length);
   var tester = users.filter(function(user) {
-    return user.fname == 'isa';
-  })
-  console.log (tester);
-  // noteservice.sendCommentNote(user.deviceToken, posting._id, req.body.content);
-  // noteservice.sendCommentNoteAndroid(user.deviceToken, posting._id, req.body.content);
+    return user.fname == 'Dian';
+  });
+  var ID = '58dfe47a657dd05c2b56df96';
+  noteservice.sendCommentNote(tester.deviceToken, id, 'Hey ' + tester.fname + ',' + '我喜欢你！');
+  noteservice.sendCommentNoteAndroid(user.deviceToken, posting._id, req.body.content);
   // for (var i = 0; i < users.length; i++) {
   //   console.log(users[i].deviceToken);
   // }
