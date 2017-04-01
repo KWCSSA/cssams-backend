@@ -8,7 +8,7 @@ mongoose.connect('mongodb://localhost/cssams');
 DBService.getNotifiableUsers(function(err, users) {
   console.log(users.length);
   var tester = users.filter(function(user) {
-    return user.fname == 'Dian';
+    return user.fname == 'isa';
   });
   var ID = '58dfe47a657dd05c2b56df96';
   console.log(tester[0].deviceToken);
