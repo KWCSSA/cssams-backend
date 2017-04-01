@@ -7,7 +7,7 @@ mongoose.connect('mongodb://localhost/cssams');
 
 DBService.getNotifiableUsers(function(err, users) {
   for (var i = 0; i < users.length; i++) {
-    console.log(users[i].fname);
+    console.log(users[i].deviceToken);
   }
 });
 
