@@ -36,6 +36,7 @@ var DBService = {
         cb(err, null);
       } else cb(null, users);
     });
-};
+  }
+}
 
 module.exports = DBService;
