@@ -35,7 +35,7 @@ var DBService = {
         logger.log('error', err);
         cb(err, null);
       } else cb(null, users);
-    }
+    });
 };
 
 module.exports = DBService;
