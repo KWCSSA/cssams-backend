@@ -23,7 +23,7 @@ var Account = new Schema({
   passwordResetExpires: Date
 });
 
-var options = ({usernameField: 'email'});
+var options = ({usernameField: 'email', usernameLowerCase: true});
 Account.plugin(passportLocalMongoose, options);
 
 module.exports = mongoose.model('Account', Account);
