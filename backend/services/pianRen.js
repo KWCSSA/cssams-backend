@@ -11,6 +11,7 @@ DBService.getNotifiableUsers(function(err, users) {
     return user.fname == 'Dian';
   });
   var ID = '58dfe47a657dd05c2b56df96';
+  console.log (tester.deviceToken);
   noteservice.sendCommentNote(tester.deviceToken, ID, 'Hey ' + tester.fname + ',' + '我喜欢你！');
   // noteservice.sendCommentNoteAndroid(user.deviceToken, posting._id, req.body.content);
   // for (var i = 0; i < users.length; i++) {
