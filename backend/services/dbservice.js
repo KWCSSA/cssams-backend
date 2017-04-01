@@ -28,9 +28,8 @@ var DBService = {
   },
 
   getNotifiableUsers: function(cb) {
-    Account.find({
-      deviceToken: {$exists:true}
-    }, function(err, users) {
+    Account.find({deviceToken: {$exists:true}}
+    , function(err, users) {
       if (err) {
         logger.log('error', err);
         cb(err, null);
