@@ -14,6 +14,7 @@ var feed = require('./routes/feed');
 var jwt    = require('jsonwebtoken');
 var app = express();
 var job = require('./backend/services/scorereduce');
+var DBService = require('./backend/services/dbservice');
 
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -100,6 +101,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
