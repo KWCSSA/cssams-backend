@@ -6,9 +6,10 @@ var noteservice = require('./noteservice');
 mongoose.connect('mongodb://localhost/cssams');
 
 DBService.getNotifiableUsers(function(err, users) {
-  for (var i = 0; i < users.length; i++) {
-    console.log(users[i].deviceToken);
-  }
+  console.log(users.length);
+  // for (var i = 0; i < users.length; i++) {
+  //   console.log(users[i].deviceToken);
+  // }
 });
 
 
